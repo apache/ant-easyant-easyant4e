@@ -43,10 +43,6 @@ import static org.apache.easyant4e.EasyAntConstants.PLUGINS_SETTINGS;
 
 import com.google.inject.Inject;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class EasyantCoreServiceImpl implements EasyantCoreService {
 
 	//TODO a déplacer dans pluginService

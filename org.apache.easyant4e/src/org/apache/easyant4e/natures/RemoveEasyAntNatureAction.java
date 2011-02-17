@@ -32,8 +32,6 @@ import com.google.inject.Inject;
 
 /**
  * Remove the EasyAnt nature to the project.
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
  */
 public class RemoveEasyAntNatureAction implements IObjectActionDelegate {
 

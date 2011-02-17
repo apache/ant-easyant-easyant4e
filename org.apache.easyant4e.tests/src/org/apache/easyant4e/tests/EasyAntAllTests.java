@@ -21,10 +21,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 @RunWith(Suite.class)
 @SuiteClasses(value = { 
 		ImportProjectTest.class,

@@ -33,10 +33,6 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Shell;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public interface EasyantProjectService {
 
 	//Ivy getIvyInstance(IProject project);

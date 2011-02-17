@@ -34,10 +34,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class EasyAntPlugin {
 
 	private final Injector injector;

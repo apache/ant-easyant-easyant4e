@@ -65,10 +65,6 @@ import org.eclipse.ui.wizards.datatransfer.ImportOperation;
 
 import com.google.inject.Inject;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class EasyantProjectServiceImpl implements EasyantProjectService{
 
 	private EasyAntConsole console;

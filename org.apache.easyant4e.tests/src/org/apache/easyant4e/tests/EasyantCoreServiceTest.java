@@ -29,10 +29,6 @@ import org.apache.easyant4e.services.EasyantCoreService;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class EasyantCoreServiceTest extends AbstractEasyAntTest {
 
 /*

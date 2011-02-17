@@ -22,10 +22,6 @@ import org.eclipse.ui.console.IConsoleFactory;
 
 import com.google.inject.Inject;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class EasyAntConsoleFactory implements IConsoleFactory {
 	
 	private EasyAntConsole console;

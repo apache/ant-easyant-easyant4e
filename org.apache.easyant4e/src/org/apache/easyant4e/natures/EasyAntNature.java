@@ -50,8 +50,6 @@ import com.google.inject.Inject;
 
 /**
  * The EastAnt nature.
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
  */
 public class EasyAntNature implements IProjectNature {
 

@@ -30,8 +30,6 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 
 /**
  * Remove the EasyAnt nature to the project.
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
  */
 public class RemoveEasyAntNatureOperation implements IRunnableWithProgress {
 

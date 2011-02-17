@@ -27,10 +27,6 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import com.google.inject.Inject;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class BuildPage extends FormPage implements IvyEditorPage {
 
 	private static final String ID = "build";

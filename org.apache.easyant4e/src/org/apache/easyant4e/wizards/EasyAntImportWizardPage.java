@@ -82,8 +82,6 @@ import com.google.inject.Inject;
  * This wizard is used to import existing EasyAnt Projects
  * 
  * Inspired from WizardProjectsImportPage
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
  */
 public class EasyAntImportWizardPage extends WizardPage {
 	

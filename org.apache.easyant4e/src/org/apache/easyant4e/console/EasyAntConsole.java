@@ -19,10 +19,6 @@ package org.apache.easyant4e.console;
 
 import org.eclipse.ui.console.IConsole;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public interface EasyAntConsole extends IConsole{
 
 	void show();

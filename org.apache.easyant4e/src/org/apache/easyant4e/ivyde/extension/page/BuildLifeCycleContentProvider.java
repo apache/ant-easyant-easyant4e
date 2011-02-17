@@ -30,10 +30,6 @@ import org.eclipse.jface.viewers.Viewer;
 
 import com.google.inject.Inject;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class BuildLifeCycleContentProvider implements ITreeContentProvider {
 
 	private EasyantProjectService easyantProjectService;

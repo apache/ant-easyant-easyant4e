@@ -26,10 +26,6 @@ import org.eclipse.ui.IWorkbench;
 
 import com.google.inject.Inject;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class EasyAntImportWizard extends Wizard implements IImportWizard {
 
 	private EasyAntImportWizardPage importPage;

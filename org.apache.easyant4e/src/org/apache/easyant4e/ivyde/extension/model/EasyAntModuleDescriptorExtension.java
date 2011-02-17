@@ -58,8 +58,6 @@ import com.google.inject.Inject;
 /**
  * This class provide extension in order to add EasyAnt semantic information in
  * Ivy module descriptor model.
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
  */
 public class EasyAntModuleDescriptorExtension implements ModuleDescriptorExtension {
 

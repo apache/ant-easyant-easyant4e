@@ -21,8 +21,6 @@ package org.apache.easyant4e.configurers;
  * This interface must be implement to configure use in order to configure a basic eclipse project.
  * 
  * In example : you muste add JavaNature, ScalaNature, GroovyNature or others
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
  */
 public interface Configurer {
 

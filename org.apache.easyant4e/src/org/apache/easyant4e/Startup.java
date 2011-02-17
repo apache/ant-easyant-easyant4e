@@ -23,10 +23,6 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.RegistryFactory;
 import org.eclipse.ui.IStartup;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 // http://wiki.eclipse.org/FAQ_How_do_I_make_my_plug-in_dynamic_aware%3F
 // http://wiki.eclipse.org/FAQ_How_do_I_make_my_plug-in_dynamic_enabled%3F
 public class Startup implements IStartup {

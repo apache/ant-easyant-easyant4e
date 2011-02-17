@@ -29,10 +29,6 @@ import org.eclipse.core.runtime.RegistryFactory;
 import org.eclipse.core.runtime.spi.IDynamicExtensionRegistry;
 import org.junit.Test;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class ExtensionRegistryTest {
 
 	@Test

@@ -50,10 +50,6 @@ import org.eclipse.ui.forms.widgets.TableWrapLayout;
 
 import com.google.inject.Inject;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class TargetDetailsPage implements IDetailsPage {
 	private IManagedForm mform;
 	private TargetReport target;

@@ -21,10 +21,6 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsolePageParticipant;
 import org.eclipse.ui.part.IPageBookViewPage;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class EasyAntConsolePageParticipant implements IConsolePageParticipant {
 
 	//private CloseConsoleAction closeAction;

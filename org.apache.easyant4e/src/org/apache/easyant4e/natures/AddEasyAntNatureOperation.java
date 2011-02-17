@@ -29,8 +29,6 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 
 /**
  * Add the EasyAnt nature to the project.
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
  */
 public class AddEasyAntNatureOperation implements IRunnableWithProgress {
 

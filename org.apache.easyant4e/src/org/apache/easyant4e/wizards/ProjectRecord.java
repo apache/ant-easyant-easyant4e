@@ -30,11 +30,6 @@ import org.eclipse.core.runtime.Platform;
 
 import com.google.inject.Inject;
 
-
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class ProjectRecord {
 	
 	private EasyantProjectService easyantProjectService;

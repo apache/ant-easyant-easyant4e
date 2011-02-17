@@ -30,10 +30,6 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class ImageProviderImpl implements ImageProvider {
 
 	public static final String IMG_HORIZONTAL = "horizontal";

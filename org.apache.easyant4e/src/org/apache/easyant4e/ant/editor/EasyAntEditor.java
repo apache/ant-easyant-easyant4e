@@ -17,9 +17,6 @@
  */
 package org.apache.easyant4e.ant.editor;
 
-/**
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 //@SuppressWarnings("restriction")
 public class EasyAntEditor /*extends org.eclipse.ant.internal.ui.editor.AntEditor*/ {
 

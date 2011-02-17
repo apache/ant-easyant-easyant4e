@@ -55,11 +55,6 @@ import org.junit.Test;
 
 import com.google.inject.Inject;
 
-
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class ImportProjectTest{
 	@Inject
 	EasyantProjectService projectService;

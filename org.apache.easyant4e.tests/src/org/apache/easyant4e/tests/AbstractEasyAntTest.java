@@ -41,10 +41,6 @@ import org.junit.Before;
 
 import com.google.inject.Inject;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public abstract class AbstractEasyAntTest {
 	protected IProject testProject;
 	protected IJavaProject testJavaProject;

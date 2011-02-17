@@ -21,10 +21,6 @@ import java.util.List;
 
 import org.apache.easyant.core.descriptor.PropertyDescriptor;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public interface EasyantCoreService {
 	
 	String getPluginsRepositoryPath();

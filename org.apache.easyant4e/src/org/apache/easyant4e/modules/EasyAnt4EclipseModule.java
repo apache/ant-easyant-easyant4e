@@ -35,11 +35,6 @@ import org.apache.easyant4e.wizards.EasyAntImportWizardPage;
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 
-
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class EasyAnt4EclipseModule extends AbstractModule{
 
 

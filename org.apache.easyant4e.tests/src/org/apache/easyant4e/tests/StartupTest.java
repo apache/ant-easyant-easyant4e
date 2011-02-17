@@ -29,10 +29,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.views.navigator.ResourceNavigator;
 import org.junit.Test;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class StartupTest extends AbstractEasyAntTest{
 	
 	@Test

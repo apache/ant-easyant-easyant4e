@@ -30,8 +30,6 @@ import com.google.inject.Inject;
 
 /**
  * This class manage plugin life cycle
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
  */
 public class Activator extends AbstractUIPlugin {
 

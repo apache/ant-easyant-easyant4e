@@ -31,10 +31,6 @@ import org.eclipse.ui.console.IConsoleManager;
 
 import com.google.inject.Inject;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class EasyAntConsoleImpl extends IvyConsole implements EasyAntConsole {
 	
 	private boolean isOpen=false;

@@ -37,8 +37,6 @@ import com.google.inject.Inject;
 
 /**
  * The EastAnt builder.
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
  */
 public class EasyAntBuilder extends IncrementalProjectBuilder {
 

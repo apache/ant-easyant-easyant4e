@@ -31,10 +31,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.junit.Test;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class EasyantProjectServiceTest extends AbstractEasyAntTest {
 
 /*

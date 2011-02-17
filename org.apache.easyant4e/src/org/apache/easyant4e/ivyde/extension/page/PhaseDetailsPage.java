@@ -52,10 +52,6 @@ import com.google.inject.Inject;
 
 //import com.google.inject.Inject;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public class PhaseDetailsPage implements IDetailsPage {
 	private IManagedForm mform;
 	private PhaseReport phase;

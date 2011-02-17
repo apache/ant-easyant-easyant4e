@@ -20,10 +20,6 @@ package org.apache.easyant4e.providers;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public interface ImageProvider {
 
 	ImageDescriptor getConsoleImageDescriptor();

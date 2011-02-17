@@ -17,10 +17,6 @@
  */
 package org.apache.easyant4e;
 
-/**
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
- */
 public interface EasyAntConstants {
 
 	

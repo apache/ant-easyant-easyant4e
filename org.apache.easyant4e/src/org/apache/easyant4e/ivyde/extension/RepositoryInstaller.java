@@ -31,8 +31,6 @@ import org.eclipse.core.runtime.IStatus;
 
 /**
  * This class unpack the default EasyAnt repository in local file system.
- * 
- * @author <a href="mailto:jerome@benois.fr">Jerome Benois</a>
  */
 public class RepositoryInstaller {
 	static final int BUFFER_SIZE = 102400;
