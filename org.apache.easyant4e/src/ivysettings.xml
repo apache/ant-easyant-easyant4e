@@ -1,0 +1,40 @@
+<!--
+   Copyright 2008-2009 the EasyAnt project
+
+	See the NOTICE file distributed with this work for additional information 
+	regarding copyright ownership.
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<ivysettings>
+	<settings defaultResolver="main"/>
+	<caches useOrigin="true" defaultCacheDir="${user.home}/.easyant/easyant-cache" />
+	<!-- Directory use by ivy retreive in order to store modules (plugins and build types) -->
+	<property name="easyant.repo.dir" value="${user.home}/.easyant/easyant-repository"/>
+	<resolvers>
+		<!-- EasyAnt modules -->
+		<filesystem name="easyant-modules">
+			<ivy pattern="${easyant.repo.dir}/modules/[organisation]/[module]/[revision]/[module].ivy"/>
+			<artifact pattern="${easyant.repo.dir}/modules/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>
+		</filesystem>
+		<!-- External required libraries -->
+		<filesystem name="easyant-shared">
+			<ivy pattern="${easyant.repo.dir}/shared/[organisation]/[module]/[revision]/[module].ivy"/>
+			<artifact pattern="${easyant.repo.dir}/shared/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>
+		</filesystem>
+		<chain name="main" returnFirst="true">
+			<resolver ref="easyant-modules"/>
+			<resolver ref="easyant-shared"/>
+		</chain>
+	</resolvers>
+</ivysettings>

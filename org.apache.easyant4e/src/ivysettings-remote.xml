@@ -1,0 +1,45 @@
+<!--
+   Copyright 2008-2009 the EasyAnt project
+
+	See the NOTICE file distributed with this work for additional information 
+	regarding copyright ownership.
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<ivysettings>
+	<settings defaultResolver="main"/>	
+	<property name="easyant.repo.url" value="http://repository.easyant.org"/>
+	<!-- Directory use by ivy retreive in order to store modules (plugins and build types) -->
+	<property name="easyant.modules.dir" value="${user.home}/.easyant/modules"/>	
+	<resolvers>
+		<filesystem name="local">
+			<ivy pattern="${easyant.modules.dir}/[organisation]/[module]/[revision]/[module].ivy" />			
+			<artifact pattern="${easyant.modules.dir}/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>
+		</filesystem>
+		<!-- EasyAnt modules -->
+		<url name="easyant-modules">
+			<ivy pattern="${easyant.repo.url}/modules/[organisation]/[module]/[revision]/[module].ivy" />			
+			<artifact pattern="${easyant.repo.url}/modules/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>			
+		</url>
+		<!-- External required libraries -->
+		<url name="easyant-shared">
+			<ivy pattern="${easyant.repo.url}/shared/[organisation]/[module]/[revision]/[module].ivy" />
+			<artifact pattern="${easyant.repo.url}/shared/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>		
+		</url>
+		<chain name="main" returnFirst="true">
+			<resolver ref="local"/>
+			<resolver ref="easyant-modules" />
+			<resolver ref="easyant-shared" />
+		</chain>		
+	</resolvers>	
+</ivysettings>

@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Easyant Core
+Bundle-SymbolicName: org.apache.easyant
+Bundle-Version: 0.6.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: lib/ant.jar,
+ lib/ant-launcher.jar,
+ lib/easyant-core.jar,
+ lib/jdtCompilerAdapter.jar,
+ lib/ivy.jar,
+ .
+Export-Package: org.apache.easyant.core,
+ org.apache.easyant.core.ant,
+ org.apache.easyant.core.descriptor,
+ org.apache.easyant.core.factory,
+ org.apache.easyant.core.parser,
+ org.apache.easyant.core.report,
+ org.apache.easyant.core.services,
+ org.apache.easyant.core.services.impl,
+ org.apache.easyant.tasks
+Require-Bundle: org.eclipse.osgi,
+ org.eclipse.jdt.launching,
+ org.eclipse.jdt.core

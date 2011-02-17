@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="/simplejavaproject/target" kind="src" output="target" path="src/main/java"/>
+	<classpathentry excluding="/simplejavaproject/target" kind="src" output="target" path="src/main/resources"/>
+	<classpathentry excluding="/simplejavaproject/target" kind="src" output="target" path="src/test/java"/>
+	<classpathentry excluding="/simplejavaproject/target" kind="src" output="target" path="src/test/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/module.ivy/*"/>
+	<classpathentry kind="output" path="target"/>
+</classpath>

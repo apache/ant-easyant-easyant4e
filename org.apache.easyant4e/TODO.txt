@@ -1,0 +1,14 @@
+* support different kind of project (java, scala)
+* update ivyDE setting when project.ivysettings.file change, when a user edit the module.ivy file
+* use checksum or version number to reinstall the local repository
+ou juste checker par rapport au qualifier
+* add internal package
+* Add Preference to manager EasyAnt core preferences (i.e: ivysettings configuration)
+* Add cool icons everywhere
+* create a new project from EasyAnt skeleton
+* Add I18N
+* Add launch config to run EaysAnt build
+===============================================================
+* bug en mode buildé : affichage en vert dans la console du message "BUILD FAILED"
+* lorsque l'on crée les source folder, tester l'existance des répertoires : ouvrir une popup pour demander à l'utilisateur ... checker cela notamment pour le multimodule
+

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+	<extension 
+		point="org.eclipse.core.resources.natures" id="EasyAntNature" name="EasyAntNature">
+		<runtime>
+        	<run class="org.apache.easyant4e.natures.EasyAntNature" /> 
+      	</runtime>
+   	</extension>
+   
+   <extension point="org.eclipse.core.resources.builders" id="EasyAntBuilder" name="EasyAntBuilder">
+      <builder>
+         <run class="org.apache.easyant4e.builders.EasyAntBuilder" /> 
+      </builder>
+   </extension>
+   
+   <extension point="org.eclipse.ui.ide.projectNatureImages">
+      <image 
+         id="org.apache.easyant4e.natures.EasyAntNatureImage"
+         natureId="org.apache.easyant4e.EasyAntNature"
+         icon="icons/EasyAntNature.gif">
+      </image>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="org.apache.easyant4e.ui.popupMenus.contribution.IProject">
+         <menu id="org.apache.easyant4e.ui.menu" label="EasyAnt" path="additionsEasyAnt">
+               <groupMarker name="nature"/> 
+         </menu>    
+         <action
+               class="org.apache.easyant4e.natures.AddEasyAntNatureAction"
+               enablesFor="1"
+               id="org.apache.easyant4e.natures.AddEasyAntNatureAction"
+               icon = "icons/EasyAntNature.gif"
+               label="Convert Project to EasyAnt Project..."
+               menubarPath="org.apache.easyant4e.ui.menu/nature">
+         </action>
+         <action
+               class="org.apache.easyant4e.natures.RemoveEasyAntNatureAction"
+               enablesFor="1"
+               id="org.apache.easyant4e.natures.RemoveEasyAntNatureAction"
+               icon = "icons/EasyAntNature.gif"
+               label="Remove EasyAnt Nature..."
+               menubarPath="org.apache.easyant4e.ui.menu/nature">
+         </action>
+      </objectContribution>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <wizard
+            class="org.apache.easyant4e.wizards.EasyAntImportWizard"
+            id="org.apache.easyant4e.wizards.EasyAntImportWizard"
+            category="org.apache.easyant4e.wizards.category"
+            name="Existing EasyAnt Project"
+            icon="icons/EasyAntNature.gif">
+            <description>Import an existing EasyAnt Project</description>
+      </wizard>
+      <category
+            id="org.apache.easyant4e.wizards.category"
+            name="EasyAnt">
+      </category>
+   </extension>
+
+   <extension
+         point="org.apache.ivyde.eclipse.moduleDescriptorExtension">
+      <moduleDescriptor
+            modelContributorClass="org.apache.easyant4e.ivyde.extension.model.EasyAntModuleDescriptorExtension"></moduleDescriptor>
+   </extension>
+   <extension
+         point="org.apache.ivyde.eclipse.editorPage">
+      <editorPage
+            pageClass="org.apache.easyant4e.ivyde.extension.page.BuildPage">
+      </editorPage>
+   </extension>
+
+   <extension point="org.eclipse.ui.console.consoleFactories">
+	  <consoleFactory 
+	     label="EasyAnt Console"
+	     class="org.apache.easyant4e.console.EasyAntConsoleFactory"
+	     icon="icons/full/obj16/ant_buildfile.gif">
+	  </consoleFactory>
+	</extension>
+
+	<extension
+          point="org.eclipse.ui.startup">
+       <startup
+             class="org.apache.easyant4e.Startup"></startup>
+    </extension>
+    <!--
+    <extension
+          point="org.eclipse.ant.core.antTasks">
+       <antTask
+             class="org.apache.easyant.tasks.CoreRevisionCheckerTask"
+             library="lib/easyant-core.jar"
+             name="org.apache.easyant.tasks.CoreRevisionCheckerTask">
+       </antTask>
+       <antTask
+             class="org.apache.easyant.tasks.Import"
+             library="lib/easyant-core.jar"
+             name="org.apache.easyant.tasks.Import">
+       </antTask>
+       <antTask
+             class="org.apache.easyant.tasks.LoadModule"
+             library="lib/easyant-core.jar"
+             name="org.apache.easyant.tasks.LoadModule">
+       </antTask>
+       <antTask
+             class="org.apache.easyant.tasks.ParameterTask"
+             library="lib/easyant-core.jar"
+             name="org.apache.easyant.tasks.ParameterTask">
+       </antTask>
+       <antTask
+             class="org.apache.easyant.tasks.PathTask"
+             library="lib/easyant-core.jar"
+             name="org.apache.easyant.tasks.PathTask">
+       </antTask>
+       <antTask
+             class="org.apache.easyant.tasks.PropertyTask"
+             library="lib/easyant-core.jar"
+             name="org.apache.easyant.tasks.PropertyTask">
+       </antTask>
+       <antTask
+             class="org.apache.easyant.tasks.RepositoryReport"
+             library="lib/easyant-core.jar"
+             name="org.apache.easyant.tasks.RepositoryReport">
+       </antTask>
+       <antTask
+             class="org.apache.easyant.tasks.SubModule"
+             library="lib/easyant-core.jar"
+             name="org.apache.easyant.tasks.SubModule">
+       </antTask>
+    </extension>
+    -->
+<!--
+ 	<extension
+       point="org.eclipse.ui.console.consolePageParticipants">
+    <consolePageParticipant
+          class="org.apache.easyant4e.console.EasyAntConsolePageParticipant"
+          id="org.apache.easyant4e.console.EasyAntConsolePageParticipant">
+       <enablement>
+          <instanceof
+                value="org.apache.easyant4e.console.EasyAntConsole">
+          </instanceof></enablement>
+    </consolePageParticipant>
+ </extension>
+-->
+
+   <!--
+    <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.apache.easyant4e.ant.editor.AntEditor"
+            extensions="ant"
+            icon="icons/full/obj16/ant_buildfile.gif"
+            id="org.eclipse.ant.ui.internal.editor.AntEditor"
+            name="EasyAnt Editor">
+            <contentTypeBinding
+               contentTypeId="org.eclipse.ant.core.antBuildFile"/> 
+      </editor>
+   </extension>
+   -->
+
+</plugin>

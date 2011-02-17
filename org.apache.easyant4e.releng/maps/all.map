@@ -1,0 +1,6 @@
+feature@org.apache.easyant4e.feature=COPY,/home/jerome/tools/easyant/easyant4e.git,org.apache.easyant4e.feature
+plugin@org.apache.easyant=COPY,/home/jerome/tools/easyant/easyant4e.git,org.apache.easyant
+plugin@org.apache.easyant4e=COPY,/home/jerome/tools/easyant/easyant4e.git,org.apache.easyant4e
+feature@org.apache.ivyde.feature=COPY,/home/jerome/tools/easyant/ivyde.git,org.apache.ivyde.feature
+plugin@org.apache.ivyde.eclipse=COPY,/home/jerome/tools/easyant/ivyde.git,org.apache.ivyde.eclipse
+plugin@org.apache.ivy=COPY,/home/jerome/tools/easyant,ivy.git
