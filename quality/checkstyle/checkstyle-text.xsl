@@ -1,5 +1,3 @@
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-
 <!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
@@ -16,7 +14,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:strip-space elements="checkstyle"/>
     <xsl:preserve-space elements="file"/>
     <xsl:output method="text"/>
