@@ -32,66 +32,66 @@ import org.eclipse.ui.console.IConsoleManager;
 import com.google.inject.Inject;
 
 public class EasyAntConsoleImpl extends IvyConsole implements EasyAntConsole {
-	
-	private boolean isOpen=false;
-	
-	public boolean isOpen() {
-		//TODO get the stat
-		return isOpen;
-	}
+    
+    private boolean isOpen=false;
+    
+    public boolean isOpen() {
+        //TODO get the stat
+        return isOpen;
+    }
 
-	public void setOpen(boolean isOpen) {
-		this.isOpen = isOpen;
-	}
-	
-	@Inject
-	public EasyAntConsoleImpl(ImageProvider imageProvider) {		
-		super("EasyAnt", imageProvider.getConsoleImageDescriptor());		
-	}
+    public void setOpen(boolean isOpen) {
+        this.isOpen = isOpen;
+    }
+    
+    @Inject
+    public EasyAntConsoleImpl(ImageProvider imageProvider) {        
+        super("EasyAnt", imageProvider.getConsoleImageDescriptor());        
+    }
 
-	public void show() {		
-		IConsoleManager manager = ConsolePlugin.getDefault().getConsoleManager();
-		IConsole[] existing = manager.getConsoles();
-		boolean exists = false;
-		for (int i = 0; i < existing.length; i++) {
-			if (this == existing[i]) {
-				exists = true;
-			}
-		}
-		if (!exists) {
-			manager.addConsoles(new IConsole[] { this });
-		}
-		manager.showConsoleView(this);
-		setOpen(true);
-		
-		//show the Error log view
-		showErrorLogView();
-		
-	}
-	
-	private void showErrorLogView(){
-	    if (PlatformUI.getWorkbench().getActiveWorkbenchWindow() != null) {
+    public void show() {        
+        IConsoleManager manager = ConsolePlugin.getDefault().getConsoleManager();
+        IConsole[] existing = manager.getConsoles();
+        boolean exists = false;
+        for (int i = 0; i < existing.length; i++) {
+            if (this == existing[i]) {
+                exists = true;
+            }
+        }
+        if (!exists) {
+            manager.addConsoles(new IConsole[] { this });
+        }
+        manager.showConsoleView(this);
+        setOpen(true);
+        
+        //show the Error log view
+        showErrorLogView();
+        
+    }
+    
+    private void showErrorLogView(){
+        if (PlatformUI.getWorkbench().getActiveWorkbenchWindow() != null) {
             if (PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage() != null) {
                     try {
-						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.pde.runtime.LogView", null, IWorkbenchPage.VIEW_ACTIVATE);
-					} catch (PartInitException e) {
-						Activator.getEasyAntPlugin().log(IStatus.ERROR, "Cannot show the Error Log view.", e);
-					}
+                        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.pde.runtime.LogView", null, IWorkbenchPage.VIEW_ACTIVATE);
+                    } catch (PartInitException e) {
+                        Activator.getEasyAntPlugin().log(IStatus.ERROR, "Cannot show the Error Log view.", e);
+                    }
             }
-	    }
-	}
+        }
+    }
 
-	@Override
-	public void error(String msg) {
-		showErrorLogView();
-		super.error(msg);
-	}
+    @Override
+    public void error(String msg) {
+        showErrorLogView();
+        super.error(msg);
+    }
 
-	public void close() {
-		IConsoleManager manager = ConsolePlugin.getDefault().getConsoleManager();
-		manager.removeConsoles(new IConsole[] { this });
-		//ConsolePlugin.getDefault().getConsoleManager().addConsoleListener(new MyLifecycle());
-		setOpen(false);
-	}
-	
+    public void close() {
+        IConsoleManager manager = ConsolePlugin.getDefault().getConsoleManager();
+        manager.removeConsoles(new IConsole[] { this });
+        //ConsolePlugin.getDefault().getConsoleManager().addConsoleListener(new MyLifecycle());
+        setOpen(false);
+    }
+    
 }

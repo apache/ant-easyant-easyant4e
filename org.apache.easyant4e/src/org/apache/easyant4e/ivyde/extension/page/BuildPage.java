@@ -29,46 +29,46 @@ import com.google.inject.Inject;
 
 public class BuildPage extends FormPage implements IvyEditorPage {
 
-	private static final String ID = "build";
-	private static final String NAME = "Build";
-	private BuildLifecycleBlock buildLifecycleBlock;
-	private ImageProvider imageProvider;
-	private EasyAntConsole console;
+    private static final String ID = "build";
+    private static final String NAME = "Build";
+    private BuildLifecycleBlock buildLifecycleBlock;
+    private ImageProvider imageProvider;
+    private EasyAntConsole console;
 
-	@Inject
-	public void setEasyAntConsole(EasyAntConsole console){
-		this.console = console;
-	}
-	
-	@Inject
-	public void setBuildLifecycleBlock(BuildLifecycleBlock buildLifecycleBlock) {
-		this.buildLifecycleBlock = buildLifecycleBlock;
-	}
-	
-	@Inject
-	public void setImageProvider(ImageProvider imageProvider) {
-		this.imageProvider = imageProvider;
-	}
+    @Inject
+    public void setEasyAntConsole(EasyAntConsole console){
+        this.console = console;
+    }
+    
+    @Inject
+    public void setBuildLifecycleBlock(BuildLifecycleBlock buildLifecycleBlock) {
+        this.buildLifecycleBlock = buildLifecycleBlock;
+    }
+    
+    @Inject
+    public void setImageProvider(ImageProvider imageProvider) {
+        this.imageProvider = imageProvider;
+    }
 
-	public BuildPage() {
-		super(ID, NAME);
-		Activator.getEasyAntPlugin().injectMembers(this);
-	}
+    public BuildPage() {
+        super(ID, NAME);
+        Activator.getEasyAntPlugin().injectMembers(this);
+    }
 
-	protected void createFormContent(IManagedForm managedForm) {
-		super.createFormContent(managedForm);
-		buildLifecycleBlock.setPage(this);
-		
-		final ScrolledForm form = managedForm.getForm();
-		form.setText("EasyAnt Build");
-		form.setBackgroundImage(imageProvider.getFormBackgroundImage());
-		buildLifecycleBlock.createContent(managedForm);
-		
-		console.show();	
-	}
+    protected void createFormContent(IManagedForm managedForm) {
+        super.createFormContent(managedForm);
+        buildLifecycleBlock.setPage(this);
+        
+        final ScrolledForm form = managedForm.getForm();
+        form.setText("EasyAnt Build");
+        form.setBackgroundImage(imageProvider.getFormBackgroundImage());
+        buildLifecycleBlock.createContent(managedForm);
+        
+        console.show(); 
+    }
 
-	public String getPageName() {
-		return NAME;
-	}
+    public String getPageName() {
+        return NAME;
+    }
 
 }

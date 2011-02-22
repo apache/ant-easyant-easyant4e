@@ -34,83 +34,83 @@ import org.junit.Test;
 public class EasyantProjectServiceTest extends AbstractEasyAntTest {
 
 /*
-	@Test
-	public void testGetIvyInstance() {
-		Ivy ivy = projectService.getIvyInstance(testProject);
-		assertNotNull(ivy);
-	}
+    @Test
+    public void testGetIvyInstance() {
+        Ivy ivy = projectService.getIvyInstance(testProject);
+        assertNotNull(ivy);
+    }
 */
-	
-	// @Test
-	// public void testAddNature(){
-	// assertFalse(projectService.hasEasyAntNature(testProject));
-	// projectService.addNature(testProject);
-	// assertTrue(projectService.hasEasyAntNature(testProject));
-	// assertFalse(projectService.hasEasyAntBuilder(testProject));
-	// }
-	//	
-	// @Test
-	// public void testRemoveNature(){
-	// assertFalse(projectService.hasEasyAntNature(testProject));
-	// projectService.addNature(testProject);
-	// assertTrue(projectService.hasEasyAntNature(testProject));
-	// assertFalse(projectService.hasEasyAntBuilder(testProject));
-	// projectService.removeNature(testProject);
-	// assertFalse(projectService.hasEasyAntNature(testProject));
-	// assertFalse(projectService.hasEasyAntBuilder(testProject));
-	// }
+    
+    // @Test
+    // public void testAddNature(){
+    // assertFalse(projectService.hasEasyAntNature(testProject));
+    // projectService.addNature(testProject);
+    // assertTrue(projectService.hasEasyAntNature(testProject));
+    // assertFalse(projectService.hasEasyAntBuilder(testProject));
+    // }
+    //  
+    // @Test
+    // public void testRemoveNature(){
+    // assertFalse(projectService.hasEasyAntNature(testProject));
+    // projectService.addNature(testProject);
+    // assertTrue(projectService.hasEasyAntNature(testProject));
+    // assertFalse(projectService.hasEasyAntBuilder(testProject));
+    // projectService.removeNature(testProject);
+    // assertFalse(projectService.hasEasyAntNature(testProject));
+    // assertFalse(projectService.hasEasyAntBuilder(testProject));
+    // }
 
-	@Test
-	public void testAddNatureOnJavaProject() {
-		IProject javaProject = testJavaProject.getProject();
-		assertFalse(projectService.hasEasyAntNature(javaProject));
-		assertFalse(projectService.hasEasyAntBuilder(javaProject));
-		projectService.addNature(javaProject);
-		assertTrue(projectService.hasEasyAntNature(javaProject));
-		assertTrue(projectService.hasEasyAntBuilder(javaProject));
-		// TODO check classpath and source folder
-	}
+    @Test
+    public void testAddNatureOnJavaProject() {
+        IProject javaProject = testJavaProject.getProject();
+        assertFalse(projectService.hasEasyAntNature(javaProject));
+        assertFalse(projectService.hasEasyAntBuilder(javaProject));
+        projectService.addNature(javaProject);
+        assertTrue(projectService.hasEasyAntNature(javaProject));
+        assertTrue(projectService.hasEasyAntBuilder(javaProject));
+        // TODO check classpath and source folder
+    }
 
-	@Test
-	public void testRemoveNatureOnJavaProject() {
-		IProject javaProject = testJavaProject.getProject();
-		assertFalse(projectService.hasEasyAntNature(javaProject));
-		projectService.addNature(javaProject);
-		assertTrue(projectService.hasEasyAntNature(javaProject));
-		assertTrue(projectService.hasEasyAntBuilder(javaProject));
-		projectService.removeNature(javaProject);
-		assertFalse(projectService.hasEasyAntNature(javaProject));
-		assertFalse(projectService.hasEasyAntBuilder(javaProject));
-		// TODO check classpath and source folder
-	}
+    @Test
+    public void testRemoveNatureOnJavaProject() {
+        IProject javaProject = testJavaProject.getProject();
+        assertFalse(projectService.hasEasyAntNature(javaProject));
+        projectService.addNature(javaProject);
+        assertTrue(projectService.hasEasyAntNature(javaProject));
+        assertTrue(projectService.hasEasyAntBuilder(javaProject));
+        projectService.removeNature(javaProject);
+        assertFalse(projectService.hasEasyAntNature(javaProject));
+        assertFalse(projectService.hasEasyAntBuilder(javaProject));
+        // TODO check classpath and source folder
+    }
 
-	@Test
-	public void testGetPhases() {
-		IProject javaProject = testJavaProject.getProject();
-		IFile ivyFile = javaProject.getFile("module.ivy");
-		assertNotNull(ivyFile);
-		List<PhaseReport> phases = projectService.getPhases(ivyFile);
-		assertNotNull(phases);		
-		assertTrue("nb phases:" + phases.size(), phases.size() > 0);
-	}
+    @Test
+    public void testGetPhases() {
+        IProject javaProject = testJavaProject.getProject();
+        IFile ivyFile = javaProject.getFile("module.ivy");
+        assertNotNull(ivyFile);
+        List<PhaseReport> phases = projectService.getPhases(ivyFile);
+        assertNotNull(phases);      
+        assertTrue("nb phases:" + phases.size(), phases.size() > 0);
+    }
 
-	@Test
-	public void testGetTargets() {
-		IProject javaProject = testJavaProject.getProject();
-		IFile ivyFile = javaProject.getFile("module.ivy");
-		assertNotNull(ivyFile);
-		List<TargetReport> targets = projectService.getTargets(ivyFile);
-		assertNotNull(targets);		
-		assertTrue("nb targets:" + targets.size(), targets.size() > 0);
-	}
+    @Test
+    public void testGetTargets() {
+        IProject javaProject = testJavaProject.getProject();
+        IFile ivyFile = javaProject.getFile("module.ivy");
+        assertNotNull(ivyFile);
+        List<TargetReport> targets = projectService.getTargets(ivyFile);
+        assertNotNull(targets);     
+        assertTrue("nb targets:" + targets.size(), targets.size() > 0);
+    }
 
-	@Test
-	public void testRunBuild() {
-		try {
-			projectService.runBuild(testJavaProject.getProject(), "compile", EasyAntConstants.ANT_LOGLEVEL_DEBUG, null);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
-	}
+    @Test
+    public void testRunBuild() {
+        try {
+            projectService.runBuild(testJavaProject.getProject(), "compile", EasyAntConstants.ANT_LOGLEVEL_DEBUG, null);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
 
 }

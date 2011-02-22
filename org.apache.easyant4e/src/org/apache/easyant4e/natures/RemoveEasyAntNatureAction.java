@@ -35,43 +35,43 @@ import com.google.inject.Inject;
  */
 public class RemoveEasyAntNatureAction implements IObjectActionDelegate {
 
-	// The selected project
-	private IProject selectedProject;
-	private EasyantProjectService easyantProjectService;
+    // The selected project
+    private IProject selectedProject;
+    private EasyantProjectService easyantProjectService;
 
-	public RemoveEasyAntNatureAction(){
-		Activator.getEasyAntPlugin().injectMembers(this);
-	}
-	
-	@Inject
-	public void setEasyantProjectService(EasyantProjectService easyantProjectService) {
-		this.easyantProjectService = easyantProjectService;
-	}
+    public RemoveEasyAntNatureAction(){
+        Activator.getEasyAntPlugin().injectMembers(this);
+    }
+    
+    @Inject
+    public void setEasyantProjectService(EasyantProjectService easyantProjectService) {
+        this.easyantProjectService = easyantProjectService;
+    }
 
-	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-	}
+    public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+    }
 
-	public void run(IAction action) {
-		if (selectedProject != null) {
-			// Remove the nature on the selected project
-			easyantProjectService.removeNature(selectedProject);
-		}
-	}
+    public void run(IAction action) {
+        if (selectedProject != null) {
+            // Remove the nature on the selected project
+            easyantProjectService.removeNature(selectedProject);
+        }
+    }
 
-	public void selectionChanged(IAction action, ISelection selection) {
-		if (selection instanceof StructuredSelection) {
-			StructuredSelection structuredSelection = (StructuredSelection) selection;
-			if (!structuredSelection.isEmpty() && structuredSelection.getFirstElement() instanceof IProject) {
-				IProject project = (IProject) structuredSelection.getFirstElement();
-				if (project.isAccessible()) {
-					this.selectedProject = project;
-					if (action != null) {
-						action.setEnabled(easyantProjectService.hasEasyAntNature(project));
-					}
-				}
+    public void selectionChanged(IAction action, ISelection selection) {
+        if (selection instanceof StructuredSelection) {
+            StructuredSelection structuredSelection = (StructuredSelection) selection;
+            if (!structuredSelection.isEmpty() && structuredSelection.getFirstElement() instanceof IProject) {
+                IProject project = (IProject) structuredSelection.getFirstElement();
+                if (project.isAccessible()) {
+                    this.selectedProject = project;
+                    if (action != null) {
+                        action.setEnabled(easyantProjectService.hasEasyAntNature(project));
+                    }
+                }
 
-			}
-		}
-	}
+            }
+        }
+    }
 
 }

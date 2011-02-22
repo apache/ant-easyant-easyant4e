@@ -42,48 +42,48 @@ import org.junit.Before;
 import com.google.inject.Inject;
 
 public abstract class AbstractEasyAntTest {
-	protected IProject testProject;
-	protected IJavaProject testJavaProject;
-	
-	@Inject
-	EasyantCoreService coreService;
-	
-	@Inject
-	EasyantProjectService projectService;
-	
-	@Before
-	public void setUp() throws Exception {
-		EasyAntPlugin easyAntPlugin = Activator.getEasyAntPlugin();
-		assertNotNull(easyAntPlugin);
-		easyAntPlugin.injectMembers(this);
-		assertNotNull(coreService);
-		assertNotNull(projectService);
-		
-		//System.out.println("setUp");
-		String testProjectName = "TestProject";
-		this.testProject = EclipseProjectBuilder.createProject(testProjectName);
-	    assertNotNull(testProject);
-	    IFile testModuleDesc = EclipseProjectBuilder.createModuleDescriptorFile(testProject, "org.apache.easyant");
-	    assertNotNull(testModuleDesc);
-	    assertTrue(testModuleDesc.exists());
-	    
-	    String testJavaProjectName = "TestJavaProject";
-	    this.testJavaProject = EclipseProjectBuilder.createJavaProject(testJavaProjectName);
-	    assertNotNull(testProject);
-	    IFile testJavaModuleDesc = EclipseProjectBuilder.createModuleDescriptorFile(testJavaProject.getProject(), "org.apache.easyant");
-	    assertNotNull(testJavaModuleDesc);
-	    assertTrue(testJavaModuleDesc.exists());	   
-	}
-	
-	@After
-	public void tearDown() throws CoreException {
-		if(this.testProject!=null){
-			EclipseProjectBuilder.deleteProject(testProject);
-			this.testProject = null;
-		}
-		if(this.testJavaProject!=null){
-			EclipseProjectBuilder.deleteProject(testJavaProject.getProject());
-			this.testJavaProject = null;			
-		}
-	}
+    protected IProject testProject;
+    protected IJavaProject testJavaProject;
+    
+    @Inject
+    EasyantCoreService coreService;
+    
+    @Inject
+    EasyantProjectService projectService;
+    
+    @Before
+    public void setUp() throws Exception {
+        EasyAntPlugin easyAntPlugin = Activator.getEasyAntPlugin();
+        assertNotNull(easyAntPlugin);
+        easyAntPlugin.injectMembers(this);
+        assertNotNull(coreService);
+        assertNotNull(projectService);
+        
+        //System.out.println("setUp");
+        String testProjectName = "TestProject";
+        this.testProject = EclipseProjectBuilder.createProject(testProjectName);
+        assertNotNull(testProject);
+        IFile testModuleDesc = EclipseProjectBuilder.createModuleDescriptorFile(testProject, "org.apache.easyant");
+        assertNotNull(testModuleDesc);
+        assertTrue(testModuleDesc.exists());
+        
+        String testJavaProjectName = "TestJavaProject";
+        this.testJavaProject = EclipseProjectBuilder.createJavaProject(testJavaProjectName);
+        assertNotNull(testProject);
+        IFile testJavaModuleDesc = EclipseProjectBuilder.createModuleDescriptorFile(testJavaProject.getProject(), "org.apache.easyant");
+        assertNotNull(testJavaModuleDesc);
+        assertTrue(testJavaModuleDesc.exists());       
+    }
+    
+    @After
+    public void tearDown() throws CoreException {
+        if(this.testProject!=null){
+            EclipseProjectBuilder.deleteProject(testProject);
+            this.testProject = null;
+        }
+        if(this.testJavaProject!=null){
+            EclipseProjectBuilder.deleteProject(testJavaProject.getProject());
+            this.testJavaProject = null;            
+        }
+    }
 }

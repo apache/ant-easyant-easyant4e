@@ -38,25 +38,25 @@ import com.google.inject.Singleton;
 public class EasyAnt4EclipseModule extends AbstractModule{
 
 
-	@Override
-	protected void configure() {		
-		bind(EasyAntConsole.class).to(EasyAntConsoleImpl.class).in(Singleton.class);
-		bind(ImageProvider.class).to(ImageProviderImpl.class).in(Singleton.class);
-		bind(EasyantCoreService.class).to(EasyantCoreServiceImpl.class).in(Singleton.class);
-		bind(EasyantProjectService.class).to(EasyantProjectServiceImpl.class).in(Singleton.class);
-		
-		bind(BuildLifecycleBlock.class).in(Singleton.class);
-		bind(BuildLifeCycleContentProvider.class).in(Singleton.class);
-		bind(BuildLifecycleLabelProvider.class).in(Singleton.class);		
-		bind(PhaseDetailsPage.class).in(Singleton.class);
-		bind(TargetDetailsPage.class).in(Singleton.class);
-		
-		bind(EasyAntImportWizardPage.class);//.in(Singleton.class);
-		
-		// Bind to instance
+    @Override
+    protected void configure() {        
+        bind(EasyAntConsole.class).to(EasyAntConsoleImpl.class).in(Singleton.class);
+        bind(ImageProvider.class).to(ImageProviderImpl.class).in(Singleton.class);
+        bind(EasyantCoreService.class).to(EasyantCoreServiceImpl.class).in(Singleton.class);
+        bind(EasyantProjectService.class).to(EasyantProjectServiceImpl.class).in(Singleton.class);
+        
+        bind(BuildLifecycleBlock.class).in(Singleton.class);
+        bind(BuildLifeCycleContentProvider.class).in(Singleton.class);
+        bind(BuildLifecycleLabelProvider.class).in(Singleton.class);        
+        bind(PhaseDetailsPage.class).in(Singleton.class);
+        bind(TargetDetailsPage.class).in(Singleton.class);
+        
+        bind(EasyAntImportWizardPage.class);//.in(Singleton.class);
+        
+        // Bind to instance
         //binder.bind(Appendable.class).toInstance(System.out);
-		
-	}
+        
+    }
 
-	
+    
 }

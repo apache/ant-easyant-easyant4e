@@ -22,21 +22,21 @@ import java.util.List;
 import org.apache.easyant.core.descriptor.PropertyDescriptor;
 
 public interface EasyantCoreService {
-	
-	String getPluginsRepositoryPath();
-	
-	/**
-	 * Install the local plugins repository
-	 */
-	void installPluginsRepository();
-	
-	String[] getAllCoreBuildTypes();
-	
-	String[] getAllCorePlugins();
-	
-	List<PropertyDescriptor> getPropertiesForBuildType(String buildTypeName);
+    
+    String getPluginsRepositoryPath();
+    
+    /**
+     * Install the local plugins repository
+     */
+    void installPluginsRepository();
+    
+    String[] getAllCoreBuildTypes();
+    
+    String[] getAllCorePlugins();
+    
+    List<PropertyDescriptor> getPropertiesForBuildType(String buildTypeName);
 
-	String getBuildTypeDescription(String buildTypeName);
+    String getBuildTypeDescription(String buildTypeName);
 
-	String getPluginDescription(String pluginName);
+    String getPluginDescription(String pluginName);
 }

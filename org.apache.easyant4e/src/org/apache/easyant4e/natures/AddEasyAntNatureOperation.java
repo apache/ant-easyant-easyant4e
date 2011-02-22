@@ -32,31 +32,31 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
  */
 public class AddEasyAntNatureOperation implements IRunnableWithProgress {
 
-	private IProject project;
+    private IProject project;
 
-	public AddEasyAntNatureOperation(IProject project) {
-		this.project = project;
-	}
+    public AddEasyAntNatureOperation(IProject project) {
+        this.project = project;
+    }
 
-	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-		if (project != null) {
-			try {
-				if (!project.hasNature(EasyAntNature.NATURE_ID)) {
-					monitor.subTask("Add the EasyAnt nature to the project " + project.getName());
-					IProjectDescription description = project.getDescription();
-					String[] oldNatures = description.getNatureIds();
-					String[] newNatures = new String[oldNatures.length + 1];
-					System.arraycopy(oldNatures, 0, newNatures, 1, oldNatures.length);
-					newNatures[0] = EasyAntNature.NATURE_ID;
-					description.setNatureIds(newNatures);
-					project.setDescription(description, new SubProgressMonitor(monitor, 1));
-				}
-			} catch (CoreException e) {
-				Activator.getEasyAntPlugin().log(e);
-			}
-			monitor.done();
-		}
+    public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+        if (project != null) {
+            try {
+                if (!project.hasNature(EasyAntNature.NATURE_ID)) {
+                    monitor.subTask("Add the EasyAnt nature to the project " + project.getName());
+                    IProjectDescription description = project.getDescription();
+                    String[] oldNatures = description.getNatureIds();
+                    String[] newNatures = new String[oldNatures.length + 1];
+                    System.arraycopy(oldNatures, 0, newNatures, 1, oldNatures.length);
+                    newNatures[0] = EasyAntNature.NATURE_ID;
+                    description.setNatureIds(newNatures);
+                    project.setDescription(description, new SubProgressMonitor(monitor, 1));
+                }
+            } catch (CoreException e) {
+                Activator.getEasyAntPlugin().log(e);
+            }
+            monitor.done();
+        }
 
-	}
+    }
 
 }

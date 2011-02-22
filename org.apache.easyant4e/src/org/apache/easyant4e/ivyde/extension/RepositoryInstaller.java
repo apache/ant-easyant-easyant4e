@@ -33,70 +33,70 @@ import org.eclipse.core.runtime.IStatus;
  * This class unpack the default EasyAnt repository in local file system.
  */
 public class RepositoryInstaller {
-	static final int BUFFER_SIZE = 102400;
-	static final String REPOSITORY_ARCHIVE_PATH = "repository.zip";
-	private URL interpreterZipUrl;
+    static final int BUFFER_SIZE = 102400;
+    static final String REPOSITORY_ARCHIVE_PATH = "repository.zip";
+    private URL interpreterZipUrl;
 
-	public void install(File installDir) {
-		this.interpreterZipUrl = Activator.getDefault().getBundle().getResource(REPOSITORY_ARCHIVE_PATH);
-		try {
-			unPackArchive(installDir);
-		} catch (IOException e) {
-			Activator.getEasyAntPlugin().log(IStatus.ERROR, "Cannot install EasyAnt repository", e);
-		}
-	}
+    public void install(File installDir) {
+        this.interpreterZipUrl = Activator.getDefault().getBundle().getResource(REPOSITORY_ARCHIVE_PATH);
+        try {
+            unPackArchive(installDir);
+        } catch (IOException e) {
+            Activator.getEasyAntPlugin().log(IStatus.ERROR, "Cannot install EasyAnt repository", e);
+        }
+    }
 
-	private void unPackArchive(File installDir) throws IOException {
-		InputStream inputStream = this.interpreterZipUrl.openStream();
-		ZipInputStream zipFileStream = new ZipInputStream(inputStream);
-		ZipEntry zipEntry = zipFileStream.getNextEntry();
-		while (zipEntry != null) {
-			File destination = new File(installDir.getPath(), zipEntry.getName());
-			if (!zipEntry.isDirectory()) {
-				/*
-				 * Copy files (and make sure parent directory exist)
-				 */
-				File parentFile = destination.getParentFile();
-				boolean parentFileExist = isFileExists(parentFile);
-				if (!parentFileExist) {
-					parentFileExist = parentFile.mkdirs();
-				}
-				if (parentFileExist) {
-					OutputStream os = null;
-					try {
-						os = new FileOutputStream(destination);
-						byte[] buffer = new byte[BUFFER_SIZE];
-						while (true) {
-							int len = zipFileStream.read(buffer);
-							if (zipFileStream.available() == 0) {
-								break;
-							}
-							os.write(buffer, 0, len);
-						}
-					} finally {
-						if (null != os) {
-							os.close();
-						}
-					}
-				} else {
-					Activator.getEasyAntPlugin().log(IStatus.ERROR,
-							"Installing EasyAnt repository, but " + parentFile + " already exists!");
-				}
-			} else {
-				boolean created = destination.mkdirs();
-				if (!created) {
-					Activator.getEasyAntPlugin().log(IStatus.ERROR,
-							"Installing EasyAnt repository. Cannot create directory: " + destination);
-				}
-			}
-			zipFileStream.closeEntry();
-			zipEntry = zipFileStream.getNextEntry();
-		}
-		inputStream.close();
-		zipFileStream.close();
-	}
+    private void unPackArchive(File installDir) throws IOException {
+        InputStream inputStream = this.interpreterZipUrl.openStream();
+        ZipInputStream zipFileStream = new ZipInputStream(inputStream);
+        ZipEntry zipEntry = zipFileStream.getNextEntry();
+        while (zipEntry != null) {
+            File destination = new File(installDir.getPath(), zipEntry.getName());
+            if (!zipEntry.isDirectory()) {
+                /*
+                 * Copy files (and make sure parent directory exist)
+                 */
+                File parentFile = destination.getParentFile();
+                boolean parentFileExist = isFileExists(parentFile);
+                if (!parentFileExist) {
+                    parentFileExist = parentFile.mkdirs();
+                }
+                if (parentFileExist) {
+                    OutputStream os = null;
+                    try {
+                        os = new FileOutputStream(destination);
+                        byte[] buffer = new byte[BUFFER_SIZE];
+                        while (true) {
+                            int len = zipFileStream.read(buffer);
+                            if (zipFileStream.available() == 0) {
+                                break;
+                            }
+                            os.write(buffer, 0, len);
+                        }
+                    } finally {
+                        if (null != os) {
+                            os.close();
+                        }
+                    }
+                } else {
+                    Activator.getEasyAntPlugin().log(IStatus.ERROR,
+                            "Installing EasyAnt repository, but " + parentFile + " already exists!");
+                }
+            } else {
+                boolean created = destination.mkdirs();
+                if (!created) {
+                    Activator.getEasyAntPlugin().log(IStatus.ERROR,
+                            "Installing EasyAnt repository. Cannot create directory: " + destination);
+                }
+            }
+            zipFileStream.closeEntry();
+            zipEntry = zipFileStream.getNextEntry();
+        }
+        inputStream.close();
+        zipFileStream.close();
+    }
 
-	private boolean isFileExists(File file) {
-		return (null != file && file.exists());
-	}
+    private boolean isFileExists(File file) {
+        return (null != file && file.exists());
+    }
 }

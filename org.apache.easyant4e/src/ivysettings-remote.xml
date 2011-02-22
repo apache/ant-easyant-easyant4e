@@ -15,29 +15,29 @@
    limitations under the License.
 -->
 <ivysettings>
-	<settings defaultResolver="main"/>	
-	<property name="easyant.repo.url" value="http://repository.easyant.org"/>
-	<!-- Directory use by ivy retreive in order to store modules (plugins and build types) -->
-	<property name="easyant.modules.dir" value="${user.home}/.easyant/modules"/>	
-	<resolvers>
-		<filesystem name="local">
-			<ivy pattern="${easyant.modules.dir}/[organisation]/[module]/[revision]/[module].ivy" />			
-			<artifact pattern="${easyant.modules.dir}/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>
-		</filesystem>
-		<!-- EasyAnt modules -->
-		<url name="easyant-modules">
-			<ivy pattern="${easyant.repo.url}/modules/[organisation]/[module]/[revision]/[module].ivy" />			
-			<artifact pattern="${easyant.repo.url}/modules/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>			
-		</url>
-		<!-- External required libraries -->
-		<url name="easyant-shared">
-			<ivy pattern="${easyant.repo.url}/shared/[organisation]/[module]/[revision]/[module].ivy" />
-			<artifact pattern="${easyant.repo.url}/shared/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>		
-		</url>
-		<chain name="main" returnFirst="true">
-			<resolver ref="local"/>
-			<resolver ref="easyant-modules" />
-			<resolver ref="easyant-shared" />
-		</chain>		
-	</resolvers>	
+    <settings defaultResolver="main"/>  
+    <property name="easyant.repo.url" value="http://repository.easyant.org"/>
+    <!-- Directory use by ivy retreive in order to store modules (plugins and build types) -->
+    <property name="easyant.modules.dir" value="${user.home}/.easyant/modules"/>    
+    <resolvers>
+        <filesystem name="local">
+            <ivy pattern="${easyant.modules.dir}/[organisation]/[module]/[revision]/[module].ivy" />            
+            <artifact pattern="${easyant.modules.dir}/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>
+        </filesystem>
+        <!-- EasyAnt modules -->
+        <url name="easyant-modules">
+            <ivy pattern="${easyant.repo.url}/modules/[organisation]/[module]/[revision]/[module].ivy" />           
+            <artifact pattern="${easyant.repo.url}/modules/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>            
+        </url>
+        <!-- External required libraries -->
+        <url name="easyant-shared">
+            <ivy pattern="${easyant.repo.url}/shared/[organisation]/[module]/[revision]/[module].ivy" />
+            <artifact pattern="${easyant.repo.url}/shared/[organisation]/[module]/[revision]/[artifact](-[classifier]).[ext]"/>     
+        </url>
+        <chain name="main" returnFirst="true">
+            <resolver ref="local"/>
+            <resolver ref="easyant-modules" />
+            <resolver ref="easyant-shared" />
+        </chain>        
+    </resolvers>    
 </ivysettings>

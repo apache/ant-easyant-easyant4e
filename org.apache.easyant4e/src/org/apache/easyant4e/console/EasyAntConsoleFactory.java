@@ -23,21 +23,21 @@ import org.eclipse.ui.console.IConsoleFactory;
 import com.google.inject.Inject;
 
 public class EasyAntConsoleFactory implements IConsoleFactory {
-	
-	private EasyAntConsole console;
-	
-	public EasyAntConsoleFactory(){
-		Activator.getEasyAntPlugin().injectMembers(this);
-	}
-	
-	@Inject
-	public void setConsole(EasyAntConsole console) {
-		this.console = console;
-	}
-	
-	public void openConsole() {		
-		if (console != null) {
-			console.show();
-		}
-	}
+    
+    private EasyAntConsole console;
+    
+    public EasyAntConsoleFactory(){
+        Activator.getEasyAntPlugin().injectMembers(this);
+    }
+    
+    @Inject
+    public void setConsole(EasyAntConsole console) {
+        this.console = console;
+    }
+    
+    public void openConsole() {     
+        if (console != null) {
+            console.show();
+        }
+    }
 }

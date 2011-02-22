@@ -23,28 +23,28 @@ import org.eclipse.ui.part.IPageBookViewPage;
 
 public class EasyAntConsolePageParticipant implements IConsolePageParticipant {
 
-	//private CloseConsoleAction closeAction;
+    //private CloseConsoleAction closeAction;
 
-	public void init(IPageBookViewPage page, IConsole console) {
-		// closeAction = new IvyConsoleRemoveAction(console);
-		// IToolBarManager manager =
-		// page.getSite().getActionBars().getToolBarManager();
-		// manager.appendToGroup(IConsoleConstants.LAUNCH_GROUP, closeAction);
-	}
+    public void init(IPageBookViewPage page, IConsole console) {
+        // closeAction = new IvyConsoleRemoveAction(console);
+        // IToolBarManager manager =
+        // page.getSite().getActionBars().getToolBarManager();
+        // manager.appendToGroup(IConsoleConstants.LAUNCH_GROUP, closeAction);
+    }
 
-	public void dispose() {
-	//	closeAction = null;
-	}
+    public void dispose() {
+    //  closeAction = null;
+    }
 
-	@SuppressWarnings("unchecked")
-	public Object getAdapter(Class adapter) {
-		return null;
-	}
+    @SuppressWarnings("unchecked")
+    public Object getAdapter(Class adapter) {
+        return null;
+    }
 
-	public void activated() {
-	}
+    public void activated() {
+    }
 
-	public void deactivated() {
-	}
+    public void deactivated() {
+    }
 
 }

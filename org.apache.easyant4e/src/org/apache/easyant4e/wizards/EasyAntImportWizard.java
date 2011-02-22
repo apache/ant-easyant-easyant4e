@@ -28,38 +28,38 @@ import com.google.inject.Inject;
 
 public class EasyAntImportWizard extends Wizard implements IImportWizard {
 
-	private EasyAntImportWizardPage importPage;
-	
-	private ImageProvider imageProvider;
-	
-	public EasyAntImportWizard(){
-		Activator.getEasyAntPlugin().injectMembers(this);
-	}
-		
-	@Inject
-	public void setImageProvider(ImageProvider imageProvider) {
-		this.imageProvider = imageProvider;
-	}
+    private EasyAntImportWizardPage importPage;
+    
+    private ImageProvider imageProvider;
+    
+    public EasyAntImportWizard(){
+        Activator.getEasyAntPlugin().injectMembers(this);
+    }
+        
+    @Inject
+    public void setImageProvider(ImageProvider imageProvider) {
+        this.imageProvider = imageProvider;
+    }
 
-	@Inject 
-	void setEasyAntImportWizardPage(EasyAntImportWizardPage importPage){
-		this.importPage=importPage;
-	}
-	
-	public void addPages() {
-		//importPage = new EasyAntImportWizardPage();
-		super.addPage(importPage);
-	}
+    @Inject 
+    void setEasyAntImportWizardPage(EasyAntImportWizardPage importPage){
+        this.importPage=importPage;
+    }
+    
+    public void addPages() {
+        //importPage = new EasyAntImportWizardPage();
+        super.addPage(importPage);
+    }
 
-	@Override
-	public boolean performFinish() {
-		return importPage.createProjects();
-	}
+    @Override
+    public boolean performFinish() {
+        return importPage.createProjects();
+    }
 
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		setNeedsProgressMonitor(true);
-		setWindowTitle("Import EasyAnt Projects");		
-		setDefaultPageImageDescriptor(imageProvider.getLogoImageDescriptor());
-	}
+    public void init(IWorkbench workbench, IStructuredSelection selection) {
+        setNeedsProgressMonitor(true);
+        setWindowTitle("Import EasyAnt Projects");      
+        setDefaultPageImageDescriptor(imageProvider.getLogoImageDescriptor());
+    }
 
 }

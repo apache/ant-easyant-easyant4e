@@ -33,35 +33,35 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
  */
 public class RemoveEasyAntNatureOperation implements IRunnableWithProgress {
 
-	private IProject project;
+    private IProject project;
 
-	public RemoveEasyAntNatureOperation(IProject project) {
-		this.project = project;
-	}
+    public RemoveEasyAntNatureOperation(IProject project) {
+        this.project = project;
+    }
 
-	@SuppressWarnings("unchecked")
-	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-		if (project != null) {
-			try {
-				if (project.getNature(EasyAntNature.NATURE_ID) != null) {
-					monitor.subTask("Remove the EasyAnt nature to the project " + project.getName());
-					IProjectDescription description = project.getDescription();
-					String[] oldNatures = description.getNatureIds();
-					ArrayList newNatures = new ArrayList();
-					for (int i = 0; i < oldNatures.length; i++) {
-						if (!oldNatures[i].equals(EasyAntNature.NATURE_ID)) {
-							newNatures.add(oldNatures[i]);
-						}
-					}
-					description.setNatureIds((String[]) newNatures.toArray(new String[newNatures.size()]));
-					project.setDescription(description, new SubProgressMonitor(monitor, 1));
-				}
-			} catch (CoreException e) {
-				Activator.getEasyAntPlugin().log(e);
-			}
-			monitor.done();
-		}
+    @SuppressWarnings("unchecked")
+    public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+        if (project != null) {
+            try {
+                if (project.getNature(EasyAntNature.NATURE_ID) != null) {
+                    monitor.subTask("Remove the EasyAnt nature to the project " + project.getName());
+                    IProjectDescription description = project.getDescription();
+                    String[] oldNatures = description.getNatureIds();
+                    ArrayList newNatures = new ArrayList();
+                    for (int i = 0; i < oldNatures.length; i++) {
+                        if (!oldNatures[i].equals(EasyAntNature.NATURE_ID)) {
+                            newNatures.add(oldNatures[i]);
+                        }
+                    }
+                    description.setNatureIds((String[]) newNatures.toArray(new String[newNatures.size()]));
+                    project.setDescription(description, new SubProgressMonitor(monitor, 1));
+                }
+            } catch (CoreException e) {
+                Activator.getEasyAntPlugin().log(e);
+            }
+            monitor.done();
+        }
 
-	}
+    }
 
 }

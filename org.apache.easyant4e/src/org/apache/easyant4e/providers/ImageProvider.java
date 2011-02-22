@@ -22,20 +22,20 @@ import org.eclipse.swt.graphics.Image;
 
 public interface ImageProvider {
 
-	ImageDescriptor getConsoleImageDescriptor();
+    ImageDescriptor getConsoleImageDescriptor();
 
-	ImageDescriptor getLogoImageDescriptor();
-	
-	Image getPhaseImage();
-	
-	Image getTargetImage();
-	
-	Image getFormBackgroundImage();
-	
-	Image getBuildImage();
-	
-	ImageDescriptor getInfoLogLevelImage();
-	
-	ImageDescriptor getDebugLogLevelImage();
-	
+    ImageDescriptor getLogoImageDescriptor();
+    
+    Image getPhaseImage();
+    
+    Image getTargetImage();
+    
+    Image getFormBackgroundImage();
+    
+    Image getBuildImage();
+    
+    ImageDescriptor getInfoLogLevelImage();
+    
+    ImageDescriptor getDebugLogLevelImage();
+    
 }

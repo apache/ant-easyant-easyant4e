@@ -43,206 +43,208 @@ import org.eclipse.jdt.launching.JavaRuntime;
  */
 public class EclipseProjectBuilder {
 
-	// private IProject project;
-	// private IJavaProject javaProject;
-	// private IPackageFragmentRoot sourceFolder;
+    // private IProject project;
+    // private IJavaProject javaProject;
+    // private IPackageFragmentRoot sourceFolder;
 
-	public EclipseProjectBuilder() throws CoreException {
-		// IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		// project = root.getProject("TestProject");
-		// project.create(null);
-		// project.open(null);
-		// javaProject = JavaCore.create(project);
-		//
-		// IFolder binFolder = createBinFolder();
-		//
-		// setJavaNature();
-		// javaProject.setRawClasspath(new IClasspathEntry[0], null);
-		//
-		// createOutputFolder(binFolder);
-		// addSystemLibraries();
-	}
+    public EclipseProjectBuilder() throws CoreException {
+        // IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+        // project = root.getProject("TestProject");
+        // project.create(null);
+        // project.open(null);
+        // javaProject = JavaCore.create(project);
+        //
+        // IFolder binFolder = createBinFolder();
+        //
+        // setJavaNature();
+        // javaProject.setRawClasspath(new IClasspathEntry[0], null);
+        //
+        // createOutputFolder(binFolder);
+        // addSystemLibraries();
+    }
 
-	public static IProject createProject(String name) throws CoreException {
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IProject project = root.getProject(name);
-		project.create(null);
-		project.open(null);
-		return project;
-	}
+    public static IProject createProject(String name) throws CoreException {
+        IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+        IProject project = root.getProject(name);
+        project.create(null);
+        project.open(null);
+        return project;
+    }
 
-	public static IJavaProject createJavaProject(String name) throws CoreException {
-		IProject project = createProject(name);
-		IJavaProject javaProject = JavaCore.create(project);
-		addJavaNature(project);
-		javaProject.setRawClasspath(new IClasspathEntry[0], null);
-		createOutputFolder(javaProject);
-		addSystemLibraries(javaProject);
-		return javaProject;
-	}
+    public static IJavaProject createJavaProject(String name) throws CoreException {
+        IProject project = createProject(name);
+        IJavaProject javaProject = JavaCore.create(project);
+        addJavaNature(project);
+        javaProject.setRawClasspath(new IClasspathEntry[0], null);
+        createOutputFolder(javaProject);
+        addSystemLibraries(javaProject);
+        return javaProject;
+    }
 
-	private static void addJavaNature(IProject project) throws CoreException {
-		IProjectDescription description = project.getDescription();
-		description.setNatureIds(new String[] { JavaCore.NATURE_ID });
-		project.setDescription(description, null);
-	}
+    private static void addJavaNature(IProject project) throws CoreException {
+        IProjectDescription description = project.getDescription();
+        description.setNatureIds(new String[] { JavaCore.NATURE_ID });
+        project.setDescription(description, null);
+    }
 
-	private static void createOutputFolder(IJavaProject javaProject) throws CoreException {
-		IFolder binFolder = createBinFolder(javaProject.getProject());
-		IPath outputLocation = binFolder.getFullPath();
-		javaProject.setOutputLocation(outputLocation, null);
-	}
+    private static void createOutputFolder(IJavaProject javaProject) throws CoreException {
+        IFolder binFolder = createBinFolder(javaProject.getProject());
+        IPath outputLocation = binFolder.getFullPath();
+        javaProject.setOutputLocation(outputLocation, null);
+    }
 
-	private static IFolder createBinFolder(IProject project) throws CoreException {
-		IFolder binFolder = project.getFolder("bin");
-		binFolder.create(false, true, null);
-		return binFolder;
-	}
+    private static IFolder createBinFolder(IProject project) throws CoreException {
+        IFolder binFolder = project.getFolder("bin");
+        binFolder.create(false, true, null);
+        return binFolder;
+    }
 
-	private static void addSystemLibraries(IJavaProject javaProject) throws JavaModelException {
-		IClasspathEntry[] oldEntries = javaProject.getRawClasspath();
-		IClasspathEntry[] newEntries = new IClasspathEntry[oldEntries.length + 1];
-		System.arraycopy(oldEntries, 0, newEntries, 0, oldEntries.length);
-		newEntries[oldEntries.length] = JavaRuntime.getDefaultJREContainerEntry();
-		javaProject.setRawClasspath(newEntries, null);
-	}
+    private static void addSystemLibraries(IJavaProject javaProject) throws JavaModelException {
+        IClasspathEntry[] oldEntries = javaProject.getRawClasspath();
+        IClasspathEntry[] newEntries = new IClasspathEntry[oldEntries.length + 1];
+        System.arraycopy(oldEntries, 0, newEntries, 0, oldEntries.length);
+        newEntries[oldEntries.length] = JavaRuntime.getDefaultJREContainerEntry();
+        javaProject.setRawClasspath(newEntries, null);
+    }
 
-	public static IFile createModuleDescriptorFile(IProject project, String org) throws CoreException {
-		IFile moduleDescFile = project.getFile("module.ivy");
-		String content = "" 
-				+ "<ivy-module version=\"2.0\" xmlns:ea=\"http://www.easyant.org\">"
-				+ "  <info organisation=\"" + org + "\" module=\"" + project.getName() + "\" status=\"integration\" >"
-				+ "    <description>project description</description>" 
-				+ "    <ea:build type=\"org.apache.easyant.buildtypes#build-std-java;0.2\" />"
-				+ "  </info>" 
-				+ "</ivy-module>";
-		InputStream in = new ByteArrayInputStream(content.getBytes());
-		moduleDescFile.create(in, true, null);
-		return moduleDescFile;
-	}
+    public static IFile createModuleDescriptorFile(IProject project, String org) throws CoreException {
+        IFile moduleDescFile = project.getFile("module.ivy");
+        String content = "" 
+                + "<ivy-module version=\"2.0\" xmlns:ea=\"http://www.easyant.org\">"
+                + "  <info organisation=\"" + org + "\" module=\"" + project.getName() + "\" status=\"integration\" >"
+                + "    <description>project description</description>" 
+                + "    <ea:build type=\"org.apache.easyant.buildtypes#build-std-java;0.2\" />"
+                + "  </info>" 
+                + "</ivy-module>";
+        InputStream in = new ByteArrayInputStream(content.getBytes());
+        moduleDescFile.create(in, true, null);
+        return moduleDescFile;
+    }
 
-	public static void deleteProject(IProject project) throws CoreException {
-		// waitForIndexer();
-		deleteProject(project, true);
-	}
-	
-	public static void deleteProject(IProject project, boolean deleteContent) throws CoreException {
-		// waitForIndexer();
-		project.delete(deleteContent, true, new NullProgressMonitor());
-	}
+    public static void deleteProject(IProject project) throws CoreException {
+        // waitForIndexer();
+        deleteProject(project, true);
+    }
+    
+    public static void deleteProject(IProject project, boolean deleteContent) throws CoreException {
+        // waitForIndexer();
+        project.delete(deleteContent, true, new NullProgressMonitor());
+    }
 
-	// public IJavaProject getJavaProject() {
-	// return javaProject;
-	// }
+    // public IJavaProject getJavaProject() {
+    // return javaProject;
+    // }
 
-	// public void addJar(String plugin, String jar) throws
-	// MalformedURLException,
-	// IOException, JavaModelException {
-	// Path result = findFileInPlugin(plugin, jar);
-	// IClasspathEntry[] oldEntries = javaProject.getRawClasspath();
-	// IClasspathEntry[] newEntries = new IClasspathEntry[oldEntries.length +
-	// 1];
-	// System.arraycopy(oldEntries, 0, newEntries, 0, oldEntries.length);
-	// newEntries[oldEntries.length] = JavaCore.newLibraryEntry(result, null,
-	// null);
-	// javaProject.setRawClasspath(newEntries, null);
-	// }
-	//
-	// public IPackageFragment createPackage(String name) throws CoreException {
-	// if (sourceFolder == null)
-	// sourceFolder = createSourceFolder();
-	// return sourceFolder.createPackageFragment(name, false, null);
-	// }
-	//
-	// public IType createType(IPackageFragment pack, String cuName, String
-	// source)
-	// throws JavaModelException {
-	// StringBuffer buf = new StringBuffer();
-	// buf.append("package " + pack.getElementName() + ";\n");
-	// buf.append("\n");
-	// buf.append(source);
-	// ICompilationUnit cu = pack.createCompilationUnit(cuName,
-	// buf.toString(), false, null);
-	// return cu.getTypes()[0];
-	// }
-	//
-	// /**
-	// * Wait for autobuild notification to occur, that is
-	// * for the autbuild to finish.
-	// */
-	// public void waitForAutoBuild() {
-	// boolean wasInterrupted = false;
-	// do {
-	// try {
-	// Platform.getJobManager().join(
-	// ResourcesPlugin.FAMILY_AUTO_BUILD, null);
-	// wasInterrupted = false;
-	// } catch (OperationCanceledException e) {
-	// throw (e);
-	// } catch (InterruptedException e) {
-	// wasInterrupted = true;
-	// }
-	// } while (wasInterrupted);
-	// }
-	//
-	// public void dispose() throws CoreException {
-	// waitForIndexer();
-	// project.delete(true, true, null);
-	// }
-	//
+    // public void addJar(String plugin, String jar) throws
+    // MalformedURLException,
+    // IOException, JavaModelException {
+    // Path result = findFileInPlugin(plugin, jar);
+    // IClasspathEntry[] oldEntries = javaProject.getRawClasspath();
+    // IClasspathEntry[] newEntries = new IClasspathEntry[oldEntries.length +
+    // 1];
+    // System.arraycopy(oldEntries, 0, newEntries, 0, oldEntries.length);
+    // newEntries[oldEntries.length] = JavaCore.newLibraryEntry(result, null,
+    // null);
+    // javaProject.setRawClasspath(newEntries, null);
+    // }
+    //
+    // public IPackageFragment createPackage(String name) throws CoreException {
+    // if (sourceFolder == null)
+    // sourceFolder = createSourceFolder();
+    // return sourceFolder.createPackageFragment(name, false, null);
+    // }
+    //
+    // public IType createType(IPackageFragment pack, String cuName, String
+    // source)
+    // throws JavaModelException {
+    // StringBuffer buf = new StringBuffer();
+    // buf.append("package " + pack.getElementName() + ";
+");
+    // buf.append("
+");
+    // buf.append(source);
+    // ICompilationUnit cu = pack.createCompilationUnit(cuName,
+    // buf.toString(), false, null);
+    // return cu.getTypes()[0];
+    // }
+    //
+    // /**
+    // * Wait for autobuild notification to occur, that is
+    // * for the autbuild to finish.
+    // */
+    // public void waitForAutoBuild() {
+    // boolean wasInterrupted = false;
+    // do {
+    // try {
+    // Platform.getJobManager().join(
+    // ResourcesPlugin.FAMILY_AUTO_BUILD, null);
+    // wasInterrupted = false;
+    // } catch (OperationCanceledException e) {
+    // throw (e);
+    // } catch (InterruptedException e) {
+    // wasInterrupted = true;
+    // }
+    // } while (wasInterrupted);
+    // }
+    //
+    // public void dispose() throws CoreException {
+    // waitForIndexer();
+    // project.delete(true, true, null);
+    // }
+    //
 
-	//
-	// public IFolder createXmlFolder() throws CoreException {
-	// IFolder xmlFolder = project.getFolder("xml");
-	// if (!xmlFolder.exists()) {
-	// xmlFolder.create(false, true, null);
-	// }
-	// return xmlFolder;
-	// }
-	//
+    //
+    // public IFolder createXmlFolder() throws CoreException {
+    // IFolder xmlFolder = project.getFolder("xml");
+    // if (!xmlFolder.exists()) {
+    // xmlFolder.create(false, true, null);
+    // }
+    // return xmlFolder;
+    // }
+    //
 
-	//
-	// private IPackageFragmentRoot createSourceFolder() throws CoreException {
-	// IFolder folder = project.getFolder("src");
-	// folder.create(false, true, null);
-	// IPackageFragmentRoot root = javaProject.getPackageFragmentRoot(folder);
-	//
-	// IClasspathEntry[] oldEntries = javaProject.getRawClasspath();
-	// IClasspathEntry[] newEntries = new IClasspathEntry[oldEntries.length +
-	// 1];
-	// System.arraycopy(oldEntries, 0, newEntries, 0, oldEntries.length);
-	// newEntries[oldEntries.length] = JavaCore.newSourceEntry(root.getPath());
-	// javaProject.setRawClasspath(newEntries, null);
-	// return root;
-	// }
-	//
+    //
+    // private IPackageFragmentRoot createSourceFolder() throws CoreException {
+    // IFolder folder = project.getFolder("src");
+    // folder.create(false, true, null);
+    // IPackageFragmentRoot root = javaProject.getPackageFragmentRoot(folder);
+    //
+    // IClasspathEntry[] oldEntries = javaProject.getRawClasspath();
+    // IClasspathEntry[] newEntries = new IClasspathEntry[oldEntries.length +
+    // 1];
+    // System.arraycopy(oldEntries, 0, newEntries, 0, oldEntries.length);
+    // newEntries[oldEntries.length] = JavaCore.newSourceEntry(root.getPath());
+    // javaProject.setRawClasspath(newEntries, null);
+    // return root;
+    // }
+    //
 
-	// private Path findFileInPlugin(String plugin, String file)
-	// throws MalformedURLException, IOException {
-	// IPluginRegistry registry = Platform.getPluginRegistry();
-	// IPluginDescriptor descriptor = registry.getPluginDescriptor(plugin);
-	// URL pluginURL = descriptor.getInstallURL();
-	// URL jarURL = new URL(pluginURL, file);
-	// URL localJarURL = Platform.asLocalURL(jarURL);
-	// return new Path(localJarURL.getPath());
-	// }
-	//
-	// private void waitForIndexer() throws JavaModelException {
-	// new SearchEngine().searchAllTypeNames(ResourcesPlugin.getWorkspace(),
-	// null, null, IJavaSearchConstants.EXACT_MATCH,
-	// IJavaSearchConstants.CASE_SENSITIVE,
-	// IJavaSearchConstants.CLASS, SearchEngine
-	// .createJavaSearchScope(new IJavaElement[0]),
-	// new ITypeNameRequestor() {
-	// public void acceptClass(char[] packageName,
-	// char[] simpleTypeName, char[][] enclosingTypeNames,
-	// String path) {
-	// }
-	//
-	// public void acceptInterface(char[] packageName,
-	// char[] simpleTypeName, char[][] enclosingTypeNames,
-	// String path) {
-	// }
-	// }, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, null);
-	// }
+    // private Path findFileInPlugin(String plugin, String file)
+    // throws MalformedURLException, IOException {
+    // IPluginRegistry registry = Platform.getPluginRegistry();
+    // IPluginDescriptor descriptor = registry.getPluginDescriptor(plugin);
+    // URL pluginURL = descriptor.getInstallURL();
+    // URL jarURL = new URL(pluginURL, file);
+    // URL localJarURL = Platform.asLocalURL(jarURL);
+    // return new Path(localJarURL.getPath());
+    // }
+    //
+    // private void waitForIndexer() throws JavaModelException {
+    // new SearchEngine().searchAllTypeNames(ResourcesPlugin.getWorkspace(),
+    // null, null, IJavaSearchConstants.EXACT_MATCH,
+    // IJavaSearchConstants.CASE_SENSITIVE,
+    // IJavaSearchConstants.CLASS, SearchEngine
+    // .createJavaSearchScope(new IJavaElement[0]),
+    // new ITypeNameRequestor() {
+    // public void acceptClass(char[] packageName,
+    // char[] simpleTypeName, char[][] enclosingTypeNames,
+    // String path) {
+    // }
+    //
+    // public void acceptInterface(char[] packageName,
+    // char[] simpleTypeName, char[][] enclosingTypeNames,
+    // String path) {
+    // }
+    // }, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, null);
+    // }
 }

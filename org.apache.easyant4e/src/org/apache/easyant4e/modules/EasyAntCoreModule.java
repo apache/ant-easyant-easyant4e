@@ -32,17 +32,17 @@ import com.google.inject.Singleton;
 
 public class EasyAntCoreModule extends AbstractModule{
 
-	@Override
-	protected void configure() {	
-		bind(EasyAntEngine.class).toProvider(new Provider<EasyAntEngine>() {
-			public EasyAntEngine get() {
-				URL url = Activator.getDefault().getBundle().getResource(PLUGINS_SETTINGS);		
-				EasyAntConfiguration configuration= EasyantConfigurationFactory.getInstance().createDefaultConfiguration();
-				configuration.setEasyantIvySettingsUrl(url);
-				return new EasyAntEngine(configuration);
-			}
-	
-		}).in(Singleton.class);
-	}
+    @Override
+    protected void configure() {    
+        bind(EasyAntEngine.class).toProvider(new Provider<EasyAntEngine>() {
+            public EasyAntEngine get() {
+                URL url = Activator.getDefault().getBundle().getResource(PLUGINS_SETTINGS);     
+                EasyAntConfiguration configuration= EasyantConfigurationFactory.getInstance().createDefaultConfiguration();
+                configuration.setEasyantIvySettingsUrl(url);
+                return new EasyAntEngine(configuration);
+            }
+    
+        }).in(Singleton.class);
+    }
 
 }

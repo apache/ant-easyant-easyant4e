@@ -53,153 +53,153 @@ import com.google.inject.Inject;
 //import com.google.inject.Inject;
 
 public class PhaseDetailsPage implements IDetailsPage {
-	private IManagedForm mform;
-	private PhaseReport phase;
-	private IProject project;
+    private IManagedForm mform;
+    private PhaseReport phase;
+    private IProject project;
 
-	private Text description;
-	private Text depends;
+    private Text description;
+    private Text depends;
 
-	private EasyantProjectService easyantProjectService;
+    private EasyantProjectService easyantProjectService;
 
-	private ImageProvider imageProvider;
-	
-	private int logLevel=EasyAntConstants.ANT_LOGLEVEL_WARN;
-	
-	public void setLogLevel(int logLevel){
-		this.logLevel=logLevel;
-	}
+    private ImageProvider imageProvider;
+    
+    private int logLevel=EasyAntConstants.ANT_LOGLEVEL_WARN;
+    
+    public void setLogLevel(int logLevel){
+        this.logLevel=logLevel;
+    }
 
-	public PhaseDetailsPage() {
-	}
+    public PhaseDetailsPage() {
+    }
 
-	public void setProject(IProject project) {
-		this.project = project;
-	}
+    public void setProject(IProject project) {
+        this.project = project;
+    }
 
-	@Inject
-	public void setImageProvider(ImageProvider imageProvider) {
-		this.imageProvider = imageProvider;
-	}
+    @Inject
+    public void setImageProvider(ImageProvider imageProvider) {
+        this.imageProvider = imageProvider;
+    }
 
-	@Inject
-	public void setEasyantProjectService(EasyantProjectService easyantProjectService) {
-		this.easyantProjectService = easyantProjectService;
-	}
+    @Inject
+    public void setEasyantProjectService(EasyantProjectService easyantProjectService) {
+        this.easyantProjectService = easyantProjectService;
+    }
 
-	public void initialize(IManagedForm mform) {
-		this.mform = mform;
-	}
+    public void initialize(IManagedForm mform) {
+        this.mform = mform;
+    }
 
-	public void createContents(Composite parent) {
-		TableWrapLayout layout = new TableWrapLayout();
-		layout.topMargin = 5;
-		layout.leftMargin = 5;
-		layout.rightMargin = 2;
-		layout.bottomMargin = 2;
-		parent.setLayout(layout);
+    public void createContents(Composite parent) {
+        TableWrapLayout layout = new TableWrapLayout();
+        layout.topMargin = 5;
+        layout.leftMargin = 5;
+        layout.rightMargin = 2;
+        layout.bottomMargin = 2;
+        parent.setLayout(layout);
 
-		FormToolkit toolkit = mform.getToolkit();
-		Section section1 = toolkit.createSection(parent, Section.DESCRIPTION | Section.TITLE_BAR);
-		section1.marginWidth = 10;
-		section1.setText("Phase Details");
-		section1
-				.setDescription("Phases define an ordered set of build phases. Build phases are responsible for the build choreography at macro level.");
-		TableWrapData td = new TableWrapData(TableWrapData.FILL, TableWrapData.TOP);
-		td.grabHorizontal = true;
-		section1.setLayoutData(td);
-		Composite client = toolkit.createComposite(section1);
-		GridLayout glayout = new GridLayout();
-		glayout.marginWidth = glayout.marginHeight = 0;
-		client.setLayout(glayout);
+        FormToolkit toolkit = mform.getToolkit();
+        Section section1 = toolkit.createSection(parent, Section.DESCRIPTION | Section.TITLE_BAR);
+        section1.marginWidth = 10;
+        section1.setText("Phase Details");
+        section1
+                .setDescription("Phases define an ordered set of build phases. Build phases are responsible for the build choreography at macro level.");
+        TableWrapData td = new TableWrapData(TableWrapData.FILL, TableWrapData.TOP);
+        td.grabHorizontal = true;
+        section1.setLayoutData(td);
+        Composite client = toolkit.createComposite(section1);
+        GridLayout glayout = new GridLayout();
+        glayout.marginWidth = glayout.marginHeight = 0;
+        client.setLayout(glayout);
 
-		createSpacer(toolkit, client, 2);
+        createSpacer(toolkit, client, 2);
 
-		toolkit.createLabel(client, "Description:");
-		description = toolkit.createText(client, "", SWT.MULTI | SWT.WRAP);
-		GridData gdDescription = new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_BEGINNING);
-		gdDescription.widthHint = 10;
-		description.setLayoutData(gdDescription);
+        toolkit.createLabel(client, "Description:");
+        description = toolkit.createText(client, "", SWT.MULTI | SWT.WRAP);
+        GridData gdDescription = new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_BEGINNING);
+        gdDescription.widthHint = 10;
+        description.setLayoutData(gdDescription);
 
-		createSpacer(toolkit, client, 2);
+        createSpacer(toolkit, client, 2);
 
-		toolkit.createLabel(client, "Depends:");
-		depends = toolkit.createText(client, "", SWT.MULTI | SWT.WRAP);
-		GridData gdDepends = new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_BEGINNING);
-		gdDepends.widthHint = 10;
-		depends.setLayoutData(gdDepends);
+        toolkit.createLabel(client, "Depends:");
+        depends = toolkit.createText(client, "", SWT.MULTI | SWT.WRAP);
+        GridData gdDepends = new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_BEGINNING);
+        gdDepends.widthHint = 10;
+        depends.setLayoutData(gdDepends);
 
-		createSpacer(toolkit, client, 2);
+        createSpacer(toolkit, client, 2);
 
-		ImageHyperlink buildLink = toolkit.createImageHyperlink(client, SWT.NULL);
-		buildLink.setText("Run this phase...");
-		buildLink.setForeground(PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_BLUE));
-		buildLink.setImage(imageProvider.getBuildImage());
-		buildLink.addHyperlinkListener(new HyperlinkAdapter() {
-			public void linkActivated(HyperlinkEvent e) {
-				Job job = new WorkspaceJob("Easyant running phase " + phase.getName() + "...") {
-					@Override
-					public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-						easyantProjectService.runBuild(project, phase.getName(), logLevel, monitor);
-						return Status.OK_STATUS;
-					}
-				};
-				job.schedule();
-			}
-		});
+        ImageHyperlink buildLink = toolkit.createImageHyperlink(client, SWT.NULL);
+        buildLink.setText("Run this phase...");
+        buildLink.setForeground(PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_BLUE));
+        buildLink.setImage(imageProvider.getBuildImage());
+        buildLink.addHyperlinkListener(new HyperlinkAdapter() {
+            public void linkActivated(HyperlinkEvent e) {
+                Job job = new WorkspaceJob("Easyant running phase " + phase.getName() + "...") {
+                    @Override
+                    public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
+                        easyantProjectService.runBuild(project, phase.getName(), logLevel, monitor);
+                        return Status.OK_STATUS;
+                    }
+                };
+                job.schedule();
+            }
+        });
 
-		section1.setClient(client);
-	}
+        section1.setClient(client);
+    }
 
-	private void createSpacer(FormToolkit toolkit, Composite parent, int span) {
-		Label spacer = toolkit.createLabel(parent, ""); //$NON-NLS-1$
-		GridData gd = new GridData();
-		gd.horizontalSpan = span;
-		spacer.setLayoutData(gd);
-	}
+    private void createSpacer(FormToolkit toolkit, Composite parent, int span) {
+        Label spacer = toolkit.createLabel(parent, ""); //$NON-NLS-1$
+        GridData gd = new GridData();
+        gd.horizontalSpan = span;
+        spacer.setLayoutData(gd);
+    }
 
-	private void update() {
-		if (phase.getDescription() != null) {
-			description.setText(phase.getDescription());
-		}
-		if (phase.getDepends() != null) {
-			depends.setText(phase.getDepends());
-		}
-	}
+    private void update() {
+        if (phase.getDescription() != null) {
+            description.setText(phase.getDescription());
+        }
+        if (phase.getDepends() != null) {
+            depends.setText(phase.getDepends());
+        }
+    }
 
-	public void selectionChanged(IFormPart part, ISelection selection) {
-		IStructuredSelection ssel = (IStructuredSelection) selection;
-		if (ssel.size() == 1) {
-			phase = (PhaseReport) ssel.getFirstElement();
-		} else {
-			phase = null;
-		}
-		update();
-	}
+    public void selectionChanged(IFormPart part, ISelection selection) {
+        IStructuredSelection ssel = (IStructuredSelection) selection;
+        if (ssel.size() == 1) {
+            phase = (PhaseReport) ssel.getFirstElement();
+        } else {
+            phase = null;
+        }
+        update();
+    }
 
-	public void commit(boolean onSave) {
-	}
+    public void commit(boolean onSave) {
+    }
 
-	public void setFocus() {
-	}
+    public void setFocus() {
+    }
 
-	public void dispose() {
-	}
+    public void dispose() {
+    }
 
-	public boolean isDirty() {
-		return false;
-	}
+    public boolean isDirty() {
+        return false;
+    }
 
-	public boolean isStale() {
-		return false;
-	}
+    public boolean isStale() {
+        return false;
+    }
 
-	public void refresh() {
-		update();
-	}
+    public void refresh() {
+        update();
+    }
 
-	public boolean setFormInput(Object input) {
-		return false;
-	}
+    public boolean setFormInput(Object input) {
+        return false;
+    }
 
 }

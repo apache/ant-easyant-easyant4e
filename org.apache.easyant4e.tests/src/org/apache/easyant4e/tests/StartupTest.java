@@ -30,48 +30,48 @@ import org.eclipse.ui.views.navigator.ResourceNavigator;
 import org.junit.Test;
 
 public class StartupTest extends AbstractEasyAntTest{
-	
-	@Test
-	public void testActivatorStartup() {
-		EasyAntPlugin easyAntPlugin = Activator.getEasyAntPlugin(); 
-		assertNotNull(easyAntPlugin);
-	}
+    
+    @Test
+    public void testActivatorStartup() {
+        EasyAntPlugin easyAntPlugin = Activator.getEasyAntPlugin(); 
+        assertNotNull(easyAntPlugin);
+    }
 
-	@Test
-	public void testEasyAntCoreServiceInit() {
-		assertNotNull(coreService);			
-	}
-	
-	@Test
-	public void testEasyAntProjectServiceInit() {
-		assertNotNull(projectService);					
-	}
-		
-	@Test
-	public void testGetCurrentProject() {	    	
-		ResourceNavigator resourceNavigator = getResourceNavigator();
-		assertNotNull(resourceNavigator);
-		
-		resourceNavigator.selectReveal(new StructuredSelection(testProject));
-		IProject project1 = Activator.getEasyAntPlugin().getCurrentProject();
-		assertNotNull(project1);
-		assertEquals(testProject, project1);
-		
-		resourceNavigator.selectReveal(new StructuredSelection(testJavaProject));
-		IProject project2 = Activator.getEasyAntPlugin().getCurrentProject();
-		assertNotNull(project2);
-		assertEquals(testJavaProject.getProject(), project2);
-	}
-	
-	private ResourceNavigator getResourceNavigator(){
-		ResourceNavigator navigator = null;
-		try {
-			navigator = (ResourceNavigator) PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.ui.views.ResourceNavigator");
-		} catch (PartInitException e) {
-			throw new RuntimeException(e);
-		}	
-		return navigator;
-	}
-	
+    @Test
+    public void testEasyAntCoreServiceInit() {
+        assertNotNull(coreService);         
+    }
+    
+    @Test
+    public void testEasyAntProjectServiceInit() {
+        assertNotNull(projectService);                  
+    }
+        
+    @Test
+    public void testGetCurrentProject() {           
+        ResourceNavigator resourceNavigator = getResourceNavigator();
+        assertNotNull(resourceNavigator);
+        
+        resourceNavigator.selectReveal(new StructuredSelection(testProject));
+        IProject project1 = Activator.getEasyAntPlugin().getCurrentProject();
+        assertNotNull(project1);
+        assertEquals(testProject, project1);
+        
+        resourceNavigator.selectReveal(new StructuredSelection(testJavaProject));
+        IProject project2 = Activator.getEasyAntPlugin().getCurrentProject();
+        assertNotNull(project2);
+        assertEquals(testJavaProject.getProject(), project2);
+    }
+    
+    private ResourceNavigator getResourceNavigator(){
+        ResourceNavigator navigator = null;
+        try {
+            navigator = (ResourceNavigator) PlatformUI.getWorkbench()
+                .getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.ui.views.ResourceNavigator");
+        } catch (PartInitException e) {
+            throw new RuntimeException(e);
+        }   
+        return navigator;
+    }
+    
 }

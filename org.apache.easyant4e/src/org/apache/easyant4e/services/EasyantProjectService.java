@@ -35,40 +35,40 @@ import org.eclipse.swt.widgets.Shell;
 
 public interface EasyantProjectService {
 
-	//Ivy getIvyInstance(IProject project);
-	
-	IProject importProject(IProjectDescription projectDescription, Shell messageShell, IProgressMonitor monitor);
-	
-	boolean hasEasyAntNature(IProject project);
-	
-	boolean hasEasyAntBuilder(IProject project);
-	
-	void addNature(IProject project);
-	
-	void removeNature(IProject project);
-	
-	/**
-	 * @param project
-	 * @param buildTaskName
-	 * @param logLevel @see {@link EasyAntConstants#ANT_LOGLEVEL_DEBUG}, ...
-	 * @param monitor
-	 */
-	void runBuild(IProject project, String buildTaskName, int logLevel, IProgressMonitor monitor);
-	
-	/**
-	 * @return a list of available phases
-	 */
-	List<PhaseReport> getPhases(IFile ivyFile);
-	
-	/**
-	 * @return a list of available targets
-	 */
-	List<TargetReport> getTargets(IFile ivyFile);
-	
-	EasyAntModuleDescriptor getEasyAntModuleDescriptor(File file);
-	
-	Map<String, PropertyDescriptor> getProperties(IProject project);
-	
-	PropertyDescriptor getProperty(IProject project, String name);
-	
+    //Ivy getIvyInstance(IProject project);
+    
+    IProject importProject(IProjectDescription projectDescription, Shell messageShell, IProgressMonitor monitor);
+    
+    boolean hasEasyAntNature(IProject project);
+    
+    boolean hasEasyAntBuilder(IProject project);
+    
+    void addNature(IProject project);
+    
+    void removeNature(IProject project);
+    
+    /**
+     * @param project
+     * @param buildTaskName
+     * @param logLevel @see {@link EasyAntConstants#ANT_LOGLEVEL_DEBUG}, ...
+     * @param monitor
+     */
+    void runBuild(IProject project, String buildTaskName, int logLevel, IProgressMonitor monitor);
+    
+    /**
+     * @return a list of available phases
+     */
+    List<PhaseReport> getPhases(IFile ivyFile);
+    
+    /**
+     * @return a list of available targets
+     */
+    List<TargetReport> getTargets(IFile ivyFile);
+    
+    EasyAntModuleDescriptor getEasyAntModuleDescriptor(File file);
+    
+    Map<String, PropertyDescriptor> getProperties(IProject project);
+    
+    PropertyDescriptor getProperty(IProject project, String name);
+    
 }

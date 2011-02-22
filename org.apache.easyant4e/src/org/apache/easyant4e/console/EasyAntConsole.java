@@ -21,14 +21,14 @@ import org.eclipse.ui.console.IConsole;
 
 public interface EasyAntConsole extends IConsole{
 
-	void show();
-	void close();
-	boolean isOpen();
-	
-	void info(String msg);
-	void error(String msg);
-	
-	 /**
+    void show();
+    void close();
+    boolean isOpen();
+    
+    void info(String msg);
+    void error(String msg);
+    
+     /**
      * Show the console.
      * 
      * @param showNoMatterWhat

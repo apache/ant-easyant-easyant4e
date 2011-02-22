@@ -31,50 +31,50 @@ import org.junit.Test;
 
 public class ExtensionRegistryTest {
 
-	@Test
-	public void testRemoveExtension() {
-		IExtensionRegistry reg = RegistryFactory.getRegistry();		
-		
-		//assertNull(reg.getExtension("org.apache.ivyde.eclipse.ui.actions.ResolveAction"));
-		//assertNull(reg.getExtension("org.eclipse.ui.popupMenus","org.apache.ivyde.eclipse.ui.actions.ResolveAction"));
-		//assertNull(reg.getExtension("org.eclipse.ui","popupMenus","org.apache.ivyde.eclipse.ui.actions.ResolveAction"));
+    @Test
+    public void testRemoveExtension() {
+        IExtensionRegistry reg = RegistryFactory.getRegistry();     
+        
+        //assertNull(reg.getExtension("org.apache.ivyde.eclipse.ui.actions.ResolveAction"));
+        //assertNull(reg.getExtension("org.eclipse.ui.popupMenus","org.apache.ivyde.eclipse.ui.actions.ResolveAction"));
+        //assertNull(reg.getExtension("org.eclipse.ui","popupMenus","org.apache.ivyde.eclipse.ui.actions.ResolveAction"));
 
-		IDynamicExtensionRegistry reg2 = (IDynamicExtensionRegistry)reg;
-		for(IContributor contributor : reg2.getAllContributors()){			
-			if("org.apache.ivyde.eclipse".equals(contributor.getName())){
-				System.out.println("--> contributor "+contributor);
-				reg2.removeContributor(contributor, ((ExtensionRegistry) reg2).getTemporaryUserToken());
-				System.out.println("--> remove all extensions ");
-			}
-		}		
-		
-//		IExtension[] extensions = reg.getExtensions("org.apache.ivyde.eclipse");
-//		assertNotNull(extensions);
-//		for(IExtension extension:extensions){
-//			if("org.eclipse.ui.popupMenus".equals(extension.getExtensionPointUniqueIdentifier())){
-//				reg.removeExtension(extension, ((ExtensionRegistry) reg).getTemporaryUserToken());
-//			}
-//			System.out.println(extension.getNamespaceIdentifier() +" - "+extension.getExtensionPointUniqueIdentifier());			
-//			final IConfigurationElement[] configElements = extension.getConfigurationElements();
-//	        for (IConfigurationElement element:configElements) {
-//	        	System.out.println("\t--> "+element.getName()+" : "+element.getAttribute("id"));		        	
-//	        }		        
-//		}
-		
-	
-	}
+        IDynamicExtensionRegistry reg2 = (IDynamicExtensionRegistry)reg;
+        for(IContributor contributor : reg2.getAllContributors()){          
+            if("org.apache.ivyde.eclipse".equals(contributor.getName())){
+                System.out.println("--> contributor "+contributor);
+                reg2.removeContributor(contributor, ((ExtensionRegistry) reg2).getTemporaryUserToken());
+                System.out.println("--> remove all extensions ");
+            }
+        }       
+        
+//      IExtension[] extensions = reg.getExtensions("org.apache.ivyde.eclipse");
+//      assertNotNull(extensions);
+//      for(IExtension extension:extensions){
+//          if("org.eclipse.ui.popupMenus".equals(extension.getExtensionPointUniqueIdentifier())){
+//              reg.removeExtension(extension, ((ExtensionRegistry) reg).getTemporaryUserToken());
+//          }
+//          System.out.println(extension.getNamespaceIdentifier() +" - "+extension.getExtensionPointUniqueIdentifier());            
+//          final IConfigurationElement[] configElements = extension.getConfigurationElements();
+//          for (IConfigurationElement element:configElements) {
+//              System.out.println("\t--> "+element.getName()+" : "+element.getAttribute("id"));                    
+//          }               
+//      }
+        
+    
+    }
 
-//	private void removeExtension(String extensionPointId, String extensionId) {
-//		IExtensionRegistry reg = RegistryFactory.getRegistry();
-//		IExtension extension = reg.getExtension(extensionPointId, extensionId);
-//		if (extension != null) {
-//			reg.removeExtension(extension, getUserToken());
-//		}
-//	}
+//  private void removeExtension(String extensionPointId, String extensionId) {
+//      IExtensionRegistry reg = RegistryFactory.getRegistry();
+//      IExtension extension = reg.getExtension(extensionPointId, extensionId);
+//      if (extension != null) {
+//          reg.removeExtension(extension, getUserToken());
+//      }
+//  }
 //
-//	private Object getUserToken() {
-//		IExtensionRegistry registry = RegistryFactory.getRegistry();
-//		// return null; // require -Declipse.registry.nulltoken=true
-//		return ((ExtensionRegistry) registry).getTemporaryUserToken();
-//	}
+//  private Object getUserToken() {
+//      IExtensionRegistry registry = RegistryFactory.getRegistry();
+//      // return null; // require -Declipse.registry.nulltoken=true
+//      return ((ExtensionRegistry) registry).getTemporaryUserToken();
+//  }
 }

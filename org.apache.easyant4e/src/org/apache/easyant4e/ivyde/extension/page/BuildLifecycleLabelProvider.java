@@ -30,33 +30,33 @@ import com.google.inject.Inject;
 
 public class BuildLifecycleLabelProvider extends BaseLabelProvider implements ILabelProvider {
 
-	@Inject 
-	private ImageProvider imageProvider;
-	
-	public BuildLifecycleLabelProvider(){
-		
-	}
-	
-	public Image getImage(Object element) {
-		if (element instanceof PhaseReport) {
-			return imageProvider.getPhaseImage();
-		}
-		if (element instanceof TargetReport) {
-			return imageProvider.getTargetImage();
-		}
-		return null;
-	}
+    @Inject 
+    private ImageProvider imageProvider;
+    
+    public BuildLifecycleLabelProvider(){
+        
+    }
+    
+    public Image getImage(Object element) {
+        if (element instanceof PhaseReport) {
+            return imageProvider.getPhaseImage();
+        }
+        if (element instanceof TargetReport) {
+            return imageProvider.getTargetImage();
+        }
+        return null;
+    }
 
-	public String getText(Object element) {
-		if (element instanceof PhaseReport) {
-			PhaseReport phaseReport = (PhaseReport) element;
-			return phaseReport.getName();
-		}
-		if (element instanceof TargetReport) {
-			TargetReport targetReport = (TargetReport) element;
-			return targetReport.getName();
-		}
-		return element.toString();
-	}
+    public String getText(Object element) {
+        if (element instanceof PhaseReport) {
+            PhaseReport phaseReport = (PhaseReport) element;
+            return phaseReport.getName();
+        }
+        if (element instanceof TargetReport) {
+            TargetReport targetReport = (TargetReport) element;
+            return targetReport.getName();
+        }
+        return element.toString();
+    }
 
 }

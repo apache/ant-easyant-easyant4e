@@ -33,86 +33,86 @@ import com.google.inject.Inject;
  */
 public class Activator extends AbstractUIPlugin {
 
-	private EasyAntPlugin easyAntPlugin;
-	private EasyAntCoreModule easyAntCoreModule;
-	private EasyAnt4EclipseModule easyAnt4EclipseModule;
+    private EasyAntPlugin easyAntPlugin;
+    private EasyAntCoreModule easyAntCoreModule;
+    private EasyAnt4EclipseModule easyAnt4EclipseModule;
 
-	private EasyantCoreService easyantCoreService;
-	
-	@Inject
-	public void setEasyantCoreService(EasyantCoreService easyantCoreService) {
-		this.easyantCoreService = easyantCoreService;
-	}
+    private EasyantCoreService easyantCoreService;
+    
+    @Inject
+    public void setEasyantCoreService(EasyantCoreService easyantCoreService) {
+        this.easyantCoreService = easyantCoreService;
+    }
 
-	public static final String PLUGIN_ID = "org.apache.easyant4e";
+    public static final String PLUGIN_ID = "org.apache.easyant4e";
 
-	// The shared instance.
-	private static Activator plugin;
-	
+    // The shared instance.
+    private static Activator plugin;
+    
 
-	/**
-	 * Create an activator and a EasyAntModule
-	 * 
-	 */
-	public Activator() {
-		super();
-		if (plugin == null) {
-			plugin = this;
-			this.easyAntCoreModule = new EasyAntCoreModule();
-			this.easyAnt4EclipseModule = new EasyAnt4EclipseModule();
-		}
-	}
+    /**
+     * Create an activator and a EasyAntModule
+     * 
+     */
+    public Activator() {
+        super();
+        if (plugin == null) {
+            plugin = this;
+            this.easyAntCoreModule = new EasyAntCoreModule();
+            this.easyAnt4EclipseModule = new EasyAnt4EclipseModule();
+        }
+    }
 
-	@Override
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
-		initializeEasyAntPlugin();		
-		easyantCoreService.installPluginsRepository();
-		Activator.getDefault().getLog().log(
-				new Status(IStatus.INFO, Activator.PLUGIN_ID, 0, "EasyAnt For Eclipse started", null));
-	}
+    @Override
+    public void start(BundleContext context) throws Exception {
+        super.start(context);
+        initializeEasyAntPlugin();      
+        easyantCoreService.installPluginsRepository();
+        Activator.getDefault().getLog().log(
+                new Status(IStatus.INFO, Activator.PLUGIN_ID, 0, "EasyAnt For Eclipse started", null));
+    }
 
-	@Override
-	public void stop(BundleContext context) throws Exception {
-		Activator.getDefault().getLog().log(
-				new Status(IStatus.INFO, Activator.PLUGIN_ID, 0, "EasyAnt For Eclipse shutdown", null));
-		plugin = null;
-		super.stop(context);
-	}
+    @Override
+    public void stop(BundleContext context) throws Exception {
+        Activator.getDefault().getLog().log(
+                new Status(IStatus.INFO, Activator.PLUGIN_ID, 0, "EasyAnt For Eclipse shutdown", null));
+        plugin = null;
+        super.stop(context);
+    }
 
-	/**
-	 * Returns the shared instance.
-	 * 
-	 * @return the plugin instance
-	 */
-	public static Activator getDefault() {
-		return plugin;
-	}
+    /**
+     * Returns the shared instance.
+     * 
+     * @return the plugin instance
+     */
+    public static Activator getDefault() {
+        return plugin;
+    }
 
-	/**
-	 * Returns the EasyAnt Plugin instance.
-	 * 
-	 * @return the EasyAnt plugin instance
-	 */
-	public static EasyAntPlugin getEasyAntPlugin() {
-		return getDefault().getEasyAntPluginInstance();
-	}
+    /**
+     * Returns the EasyAnt Plugin instance.
+     * 
+     * @return the EasyAnt plugin instance
+     */
+    public static EasyAntPlugin getEasyAntPlugin() {
+        return getDefault().getEasyAntPluginInstance();
+    }
 
-	/**
-	 * Returns the EasyAntPlugin instance.
-	 */
-	private EasyAntPlugin getEasyAntPluginInstance() {
-		if (easyAntPlugin == null) {
-			initializeEasyAntPlugin();
-		}
-		return easyAntPlugin;
-	}
+    /**
+     * Returns the EasyAntPlugin instance.
+     */
+    private EasyAntPlugin getEasyAntPluginInstance() {
+        if (easyAntPlugin == null) {
+            initializeEasyAntPlugin();
+        }
+        return easyAntPlugin;
+    }
 
-	private void initializeEasyAntPlugin() {
-		if (easyAntPlugin == null) {
-			easyAntPlugin = new EasyAntPlugin(easyAntCoreModule, easyAnt4EclipseModule);
-			easyAntPlugin.injectMembers(this);
-		}
-	}
-		
+    private void initializeEasyAntPlugin() {
+        if (easyAntPlugin == null) {
+            easyAntPlugin = new EasyAntPlugin(easyAntCoreModule, easyAnt4EclipseModule);
+            easyAntPlugin.injectMembers(this);
+        }
+    }
+        
 }

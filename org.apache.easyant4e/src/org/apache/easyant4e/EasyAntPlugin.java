@@ -36,118 +36,118 @@ import com.google.inject.Module;
 
 public class EasyAntPlugin {
 
-	private final Injector injector;
+    private final Injector injector;
 
-	public EasyAntPlugin(Module... modules) {
-		injector = Guice.createInjector(modules);
-		injectMembers(this);
-	}
+    public EasyAntPlugin(Module... modules) {
+        injector = Guice.createInjector(modules);
+        injectMembers(this);
+    }
 
-	public void injectMembers(Object instance) {
-		injector.injectMembers(instance);
-	}
+    public void injectMembers(Object instance) {
+        injector.injectMembers(instance);
+    }
 
-	/**
-	 * Return the {@link EasyantCoreService}.
-	 */
-	/*public EasyantCoreService getEasyantCoreService() {
-		return getInstance(EasyantCoreService.class);
-	}*/
+    /**
+     * Return the {@link EasyantCoreService}.
+     */
+    /*public EasyantCoreService getEasyantCoreService() {
+        return getInstance(EasyantCoreService.class);
+    }*/
 
-	/**
-	 * Return the {@link EasyantProjectService}.
-	 */
-	/*
-	public EasyantProjectService getEasyantProjectService() {
-		return getInstance(EasyantProjectService.class);
-	}*/
+    /**
+     * Return the {@link EasyantProjectService}.
+     */
+    /*
+    public EasyantProjectService getEasyantProjectService() {
+        return getInstance(EasyantProjectService.class);
+    }*/
 
-	public IProject getCurrentProject() {
-		try {
-			return getSelectedProject();
-		} catch (CoreException e) {
-			log(e);
-		}
-		return null;
-	}
+    public IProject getCurrentProject() {
+        try {
+            return getSelectedProject();
+        } catch (CoreException e) {
+            log(e);
+        }
+        return null;
+    }
 
-	// private IJavaProject getJavaProject() throws CoreException {
-	// IProject project = getSelectedProject();
-	// IJavaProject javaProject=null;
-	// if(project.hasNature(JavaCore.NATURE_ID)){
-	// javaProject = (IJavaProject)project.getNature(JavaCore.NATURE_ID);
-	// }
-	// return javaProject;
-	//}
+    // private IJavaProject getJavaProject() throws CoreException {
+    // IProject project = getSelectedProject();
+    // IJavaProject javaProject=null;
+    // if(project.hasNature(JavaCore.NATURE_ID)){
+    // javaProject = (IJavaProject)project.getNature(JavaCore.NATURE_ID);
+    // }
+    // return javaProject;
+    //}
 
-	private IProject getSelectedProject() throws CoreException {
-		IProject project = null;
-		Object selectedResource = getSelectedResource();
-		if (selectedResource instanceof IResource) {
-			IResource resource = (IResource) selectedResource;
-			project = resource.getProject();
-		} else if (selectedResource instanceof ClassPathContainer) {
-			// FIXME maybe use Adaptable and WorkbenchAdapter to resolve project
-			// container
-			project = ((ClassPathContainer) selectedResource).getJavaProject().getProject();
-		}
-		return project;
-	}
+    private IProject getSelectedProject() throws CoreException {
+        IProject project = null;
+        Object selectedResource = getSelectedResource();
+        if (selectedResource instanceof IResource) {
+            IResource resource = (IResource) selectedResource;
+            project = resource.getProject();
+        } else if (selectedResource instanceof ClassPathContainer) {
+            // FIXME maybe use Adaptable and WorkbenchAdapter to resolve project
+            // container
+            project = ((ClassPathContainer) selectedResource).getJavaProject().getProject();
+        }
+        return project;
+    }
 
-	private Object getSelectedResource() {
-		IStructuredSelection selection = getStructuredSelection();
-		if (selection != null) {
-			Object element = selection.getFirstElement();
-			return element;
-		}
-		return null;
-	}
+    private Object getSelectedResource() {
+        IStructuredSelection selection = getStructuredSelection();
+        if (selection != null) {
+            Object element = selection.getFirstElement();
+            return element;
+        }
+        return null;
+    }
 
-	private IStructuredSelection getStructuredSelection() {
-		ISelection selection = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService()
-				.getSelection();
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection ss = (IStructuredSelection) selection;
-			return ss;
-		}
-		return null;
-	}
+    private IStructuredSelection getStructuredSelection() {
+        ISelection selection = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService()
+                .getSelection();
+        if (selection instanceof IStructuredSelection) {
+            IStructuredSelection ss = (IStructuredSelection) selection;
+            return ss;
+        }
+        return null;
+    }
 
-	public void log(int severity, String message) {
-		log(severity, message, null);
-	}
+    public void log(int severity, String message) {
+        log(severity, message, null);
+    }
 
-	public void log(int severity, String message, Throwable e) {
-		log(new Status(severity, Activator.PLUGIN_ID, 0, message, e));
-	}
+    public void log(int severity, String message, Throwable e) {
+        log(new Status(severity, Activator.PLUGIN_ID, 0, message, e));
+    }
 
-	public void log(CoreException e) {
-		log(e.getStatus().getSeverity(), "EasyAnt For Eclipse - Internal Error", e);
-	}
+    public void log(CoreException e) {
+        log(e.getStatus().getSeverity(), "EasyAnt For Eclipse - Internal Error", e);
+    }
 
-	public void log(IStatus status) {
-		Activator.getDefault().getLog().log(status);
-	}
+    public void log(IStatus status) {
+        Activator.getDefault().getLog().log(status);
+    }
 
-	/**
-	 * Return the workspace used by the workbench
-	 * 
-	 * This method is internal to the workbench and must not be called by any
-	 * plugins.
-	 */
-	public IWorkspace getPluginWorkspace() {
-		return ResourcesPlugin.getWorkspace();
-	}
+    /**
+     * Return the workspace used by the workbench
+     * 
+     * This method is internal to the workbench and must not be called by any
+     * plugins.
+     */
+    public IWorkspace getPluginWorkspace() {
+        return ResourcesPlugin.getWorkspace();
+    }
 
-	/**
-	 * Get instances from the injector.
-	 * 
-	 * @param type
-	 *            the type to get an instance of
-	 * @return the instance
-	 */
-	public <T> T getInstance(Class<T> type) {
-		return injector.getInstance(type);
-	}
+    /**
+     * Get instances from the injector.
+     * 
+     * @param type
+     *            the type to get an instance of
+     * @return the instance
+     */
+    public <T> T getInstance(Class<T> type) {
+        return injector.getInstance(type);
+    }
 
 }

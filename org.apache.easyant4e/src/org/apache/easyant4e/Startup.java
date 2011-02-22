@@ -27,33 +27,33 @@ import org.eclipse.ui.IStartup;
 // http://wiki.eclipse.org/FAQ_How_do_I_make_my_plug-in_dynamic_enabled%3F
 public class Startup implements IStartup {
 
-	public void earlyStartup() {
-		//TODO add aspect to kill 
-		//ExtensionRegistry -> private boolean checkReadWriteAccess(Object key, boolean persist) {
-		
-//		System.out.println("--- clean IvyDE extension");
-//		IExtensionRegistry reg = RegistryFactory.getRegistry();
-//		IExtension[] extensions = reg.getExtensions("org.apache.ivyde.eclipse");		
-//		for (IExtension extension : extensions) {
-//			if ("org.eclipse.ui.popupMenus".equals(extension.getExtensionPointUniqueIdentifier())) {
-//				System.out.println("--> remove "+extension);
-//				try{
-//					reg.removeExtension(extension, getUserToken());
-//				}catch(Exception e){
-//					e.printStackTrace();
-//				}
-//				System.out.println("--> extension removed!");
-//				break;
-//			}
-//		}
-	}
+    public void earlyStartup() {
+        //TODO add aspect to kill 
+        //ExtensionRegistry -> private boolean checkReadWriteAccess(Object key, boolean persist) {
+        
+//      System.out.println("--- clean IvyDE extension");
+//      IExtensionRegistry reg = RegistryFactory.getRegistry();
+//      IExtension[] extensions = reg.getExtensions("org.apache.ivyde.eclipse");        
+//      for (IExtension extension : extensions) {
+//          if ("org.eclipse.ui.popupMenus".equals(extension.getExtensionPointUniqueIdentifier())) {
+//              System.out.println("--> remove "+extension);
+//              try{
+//                  reg.removeExtension(extension, getUserToken());
+//              }catch(Exception e){
+//                  e.printStackTrace();
+//              }
+//              System.out.println("--> extension removed!");
+//              break;
+//          }
+//      }
+    }
 
-	/*
-	private Object getUserToken() {
-		IExtensionRegistry registry = RegistryFactory.getRegistry();
-		//return null; // require -Declipse.registry.nulltoken=true
-		return ((ExtensionRegistry) registry).getTemporaryUserToken();
-	}
+    /*
+    private Object getUserToken() {
+        IExtensionRegistry registry = RegistryFactory.getRegistry();
+        //return null; // require -Declipse.registry.nulltoken=true
+        return ((ExtensionRegistry) registry).getTemporaryUserToken();
+    }
 */
-	
+    
 }

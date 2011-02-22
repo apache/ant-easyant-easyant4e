@@ -32,46 +32,46 @@ import org.junit.Test;
 public class EasyantCoreServiceTest extends AbstractEasyAntTest {
 
 /*
-	@Test
-	public void testGetIvyInstance() {
-		Ivy ivy = coreService.getIvyInstance(testProject);
-		assertNotNull(ivy);
-	}
+    @Test
+    public void testGetIvyInstance() {
+        Ivy ivy = coreService.getIvyInstance(testProject);
+        assertNotNull(ivy);
+    }
 */
 
-	@Test
-	public void testGetPluginsRepositoryPath() {
-		String pluginsRepositoryPath = coreService.getPluginsRepositoryPath();
-		assertNotNull(pluginsRepositoryPath);
-		String pluginPath = System.getProperty("user.home") + "/.easyant/repository";
-		assertEquals(pluginPath, pluginsRepositoryPath);
-	}
+    @Test
+    public void testGetPluginsRepositoryPath() {
+        String pluginsRepositoryPath = coreService.getPluginsRepositoryPath();
+        assertNotNull(pluginsRepositoryPath);
+        String pluginPath = System.getProperty("user.home") + "/.easyant/repository";
+        assertEquals(pluginPath, pluginsRepositoryPath);
+    }
 
-	@Test
-	public void testInstallPluginsRepository() {
-		String pluginsRepositoryPath = coreService.getPluginsRepositoryPath();
-		File pluginsRepositoryDir = new File(pluginsRepositoryPath);
-		assertTrue(deleteDirectory(pluginsRepositoryDir));
-		assertFalse(pluginsRepositoryDir.exists());
-		coreService.installPluginsRepository();
-		assertTrue(pluginsRepositoryDir.exists());
-	}
+    @Test
+    public void testInstallPluginsRepository() {
+        String pluginsRepositoryPath = coreService.getPluginsRepositoryPath();
+        File pluginsRepositoryDir = new File(pluginsRepositoryPath);
+        assertTrue(deleteDirectory(pluginsRepositoryDir));
+        assertFalse(pluginsRepositoryDir.exists());
+        coreService.installPluginsRepository();
+        assertTrue(pluginsRepositoryDir.exists());
+    }
 
-	private boolean deleteDirectory(File path) {
-		boolean resultat = true;
+    private boolean deleteDirectory(File path) {
+        boolean resultat = true;
 
-		if (path.exists()) {
-			File[] files = path.listFiles();
-			for (int i = 0; i < files.length; i++) {
-				if (files[i].isDirectory()) {
-					resultat &= deleteDirectory(files[i]);
-				} else {
-					resultat &= files[i].delete();
-				}
-			}
-		}
-		resultat &= path.delete();
-		return (resultat);
-	}
+        if (path.exists()) {
+            File[] files = path.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory()) {
+                    resultat &= deleteDirectory(files[i]);
+                } else {
+                    resultat &= files[i].delete();
+                }
+            }
+        }
+        resultat &= path.delete();
+        return (resultat);
+    }
 
 }

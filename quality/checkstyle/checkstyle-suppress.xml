@@ -19,5 +19,5 @@
    limitations under the License.
 -->
 <suppressions>
-	<suppress checks="MagicNumber" files=".*[\\/]test[\\/]java[\\/].*"/>
+    <suppress checks="MagicNumber" files=".*[\/]test[\/]java[\/].*"/>
 </suppressions>

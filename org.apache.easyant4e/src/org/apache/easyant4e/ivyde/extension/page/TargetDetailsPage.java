@@ -51,152 +51,152 @@ import org.eclipse.ui.forms.widgets.TableWrapLayout;
 import com.google.inject.Inject;
 
 public class TargetDetailsPage implements IDetailsPage {
-	private IManagedForm mform;
-	private TargetReport target;
+    private IManagedForm mform;
+    private TargetReport target;
 
-	private IProject project;
+    private IProject project;
 
-	private Text description;
-	private Text depends;
-	
-	private EasyantProjectService easyantProjectService;
+    private Text description;
+    private Text depends;
+    
+    private EasyantProjectService easyantProjectService;
 
-	private ImageProvider imageProvider;	
+    private ImageProvider imageProvider;    
 
-	private int logLevel=EasyAntConstants.ANT_LOGLEVEL_WARN;
-	
-	public void setLogLevel(int logLevel){
-		this.logLevel=logLevel;
-	}
-	
-	public TargetDetailsPage() {}
-	
-	public void setProject(IProject project) {
-		this.project = project;
-	}
-	
-	@Inject
-	public void setImageProvider(ImageProvider imageProvider) {
-		this.imageProvider = imageProvider;
-	}
-	
-	
-	@Inject
-	public void setEasyantProjectService(EasyantProjectService easyantProjectService) {
-		this.easyantProjectService = easyantProjectService;
-	}
+    private int logLevel=EasyAntConstants.ANT_LOGLEVEL_WARN;
+    
+    public void setLogLevel(int logLevel){
+        this.logLevel=logLevel;
+    }
+    
+    public TargetDetailsPage() {}
+    
+    public void setProject(IProject project) {
+        this.project = project;
+    }
+    
+    @Inject
+    public void setImageProvider(ImageProvider imageProvider) {
+        this.imageProvider = imageProvider;
+    }
+    
+    
+    @Inject
+    public void setEasyantProjectService(EasyantProjectService easyantProjectService) {
+        this.easyantProjectService = easyantProjectService;
+    }
 
-	public void createContents(Composite parent) {
-		TableWrapLayout layout = new TableWrapLayout();
-		layout.topMargin = 5;
-		layout.leftMargin = 5;
-		layout.rightMargin = 2;
-		layout.bottomMargin = 2;
-		parent.setLayout(layout);
+    public void createContents(Composite parent) {
+        TableWrapLayout layout = new TableWrapLayout();
+        layout.topMargin = 5;
+        layout.leftMargin = 5;
+        layout.rightMargin = 2;
+        layout.bottomMargin = 2;
+        parent.setLayout(layout);
 
-		FormToolkit toolkit = mform.getToolkit();
-		Section section1 = toolkit.createSection(parent, Section.DESCRIPTION | Section.TITLE_BAR);
-		section1.marginWidth = 10;
-		section1.setText("Target Details");
-		section1.setDescription("Targets define a build unit.");		
-		TableWrapData td = new TableWrapData(TableWrapData.FILL, TableWrapData.TOP);
-		td.grabHorizontal = true;
-		section1.setLayoutData(td);
-		Composite client = toolkit.createComposite(section1);
-		GridLayout glayout = new GridLayout();
-		glayout.marginWidth = glayout.marginHeight = 0;
-		client.setLayout(glayout);
+        FormToolkit toolkit = mform.getToolkit();
+        Section section1 = toolkit.createSection(parent, Section.DESCRIPTION | Section.TITLE_BAR);
+        section1.marginWidth = 10;
+        section1.setText("Target Details");
+        section1.setDescription("Targets define a build unit.");        
+        TableWrapData td = new TableWrapData(TableWrapData.FILL, TableWrapData.TOP);
+        td.grabHorizontal = true;
+        section1.setLayoutData(td);
+        Composite client = toolkit.createComposite(section1);
+        GridLayout glayout = new GridLayout();
+        glayout.marginWidth = glayout.marginHeight = 0;
+        client.setLayout(glayout);
 
-		createSpacer(toolkit, client, 2);
+        createSpacer(toolkit, client, 2);
 
-		toolkit.createLabel(client, "Description:");
-		description = toolkit.createText(client, "", SWT.MULTI | SWT.WRAP);
-		GridData gdDescription = new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_BEGINNING);
-		gdDescription.widthHint = 10;
-		description.setLayoutData(gdDescription);
+        toolkit.createLabel(client, "Description:");
+        description = toolkit.createText(client, "", SWT.MULTI | SWT.WRAP);
+        GridData gdDescription = new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_BEGINNING);
+        gdDescription.widthHint = 10;
+        description.setLayoutData(gdDescription);
 
-		createSpacer(toolkit, client, 2);
-		
-		toolkit.createLabel(client, "Depends:");
-		depends = toolkit.createText(client, "", SWT.MULTI | SWT.WRAP);
-		GridData gdDepends = new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_BEGINNING);
-		gdDepends.widthHint = 10;
-		depends.setLayoutData(gdDepends);
+        createSpacer(toolkit, client, 2);
+        
+        toolkit.createLabel(client, "Depends:");
+        depends = toolkit.createText(client, "", SWT.MULTI | SWT.WRAP);
+        GridData gdDepends = new GridData(GridData.FILL_HORIZONTAL | GridData.VERTICAL_ALIGN_BEGINNING);
+        gdDepends.widthHint = 10;
+        depends.setLayoutData(gdDepends);
 
-		createSpacer(toolkit, client, 2);
-		
-		ImageHyperlink buildLink = toolkit.createImageHyperlink(client, SWT.NULL);
-		buildLink.setText("Run this target...");
-		buildLink.setForeground(PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_BLUE));
-		buildLink.setImage(imageProvider.getBuildImage());
-		buildLink.addHyperlinkListener(new HyperlinkAdapter() {
-			public void linkActivated(HyperlinkEvent e) {
-				Job job = new WorkspaceJob("Easyant running target " + target.getName() + "...") {
-					@Override
-					public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
-						easyantProjectService.runBuild(project, target.getName(), logLevel, monitor);
-						return Status.OK_STATUS;
-					}
-				};
-				job.schedule();
-			}
-		});
-		section1.setClient(client);
-	}
+        createSpacer(toolkit, client, 2);
+        
+        ImageHyperlink buildLink = toolkit.createImageHyperlink(client, SWT.NULL);
+        buildLink.setText("Run this target...");
+        buildLink.setForeground(PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_BLUE));
+        buildLink.setImage(imageProvider.getBuildImage());
+        buildLink.addHyperlinkListener(new HyperlinkAdapter() {
+            public void linkActivated(HyperlinkEvent e) {
+                Job job = new WorkspaceJob("Easyant running target " + target.getName() + "...") {
+                    @Override
+                    public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
+                        easyantProjectService.runBuild(project, target.getName(), logLevel, monitor);
+                        return Status.OK_STATUS;
+                    }
+                };
+                job.schedule();
+            }
+        });
+        section1.setClient(client);
+    }
 
-	private void createSpacer(FormToolkit toolkit, Composite parent, int span) {
-		Label spacer = toolkit.createLabel(parent, ""); //$NON-NLS-1$
-		GridData gd = new GridData();
-		gd.horizontalSpan = span;
-		spacer.setLayoutData(gd);
-	}
-	
-	public void initialize(IManagedForm form) {
-		this.mform = form;
-	}
+    private void createSpacer(FormToolkit toolkit, Composite parent, int span) {
+        Label spacer = toolkit.createLabel(parent, ""); //$NON-NLS-1$
+        GridData gd = new GridData();
+        gd.horizontalSpan = span;
+        spacer.setLayoutData(gd);
+    }
+    
+    public void initialize(IManagedForm form) {
+        this.mform = form;
+    }
 
-	public void selectionChanged(IFormPart part, ISelection selection) {
-		IStructuredSelection ssel = (IStructuredSelection) selection;
-		if (ssel.size() == 1) {
-			target = (TargetReport) ssel.getFirstElement();
-		} else {
-			target = null;
-		}
-		update();
-	}
+    public void selectionChanged(IFormPart part, ISelection selection) {
+        IStructuredSelection ssel = (IStructuredSelection) selection;
+        if (ssel.size() == 1) {
+            target = (TargetReport) ssel.getFirstElement();
+        } else {
+            target = null;
+        }
+        update();
+    }
 
-	private void update() {
-		if(target.getDescription()!=null){
-			description.setText(target.getDescription());
-		}
-		if(target.getDepends()!=null){
-			depends.setText(target.getDepends());
-		}
-	}
+    private void update() {
+        if(target.getDescription()!=null){
+            description.setText(target.getDescription());
+        }
+        if(target.getDepends()!=null){
+            depends.setText(target.getDepends());
+        }
+    }
 
 
-	public void commit(boolean onSave) {
-	}
+    public void commit(boolean onSave) {
+    }
 
-	public void dispose() {
-	}
-	
-	public boolean isDirty() {
-		return false;
-	}
+    public void dispose() {
+    }
+    
+    public boolean isDirty() {
+        return false;
+    }
 
-	public boolean isStale() {
-		return false;
-	}
+    public boolean isStale() {
+        return false;
+    }
 
-	public void refresh() {
-	}
+    public void refresh() {
+    }
 
-	public void setFocus() {
-	}
+    public void setFocus() {
+    }
 
-	public boolean setFormInput(Object input) {
-		return false;
-	}
+    public boolean setFormInput(Object input) {
+        return false;
+    }
 
 }

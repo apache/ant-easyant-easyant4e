@@ -23,11 +23,11 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses(value = { 
-		ImportProjectTest.class,
-		StartupTest.class, 
-		EasyantCoreServiceTest.class,
-		EasyantProjectServiceTest.class	
-		
+        ImportProjectTest.class,
+        StartupTest.class, 
+        EasyantCoreServiceTest.class,
+        EasyantProjectServiceTest.class 
+        
 })
 public class EasyAntAllTests {
 
