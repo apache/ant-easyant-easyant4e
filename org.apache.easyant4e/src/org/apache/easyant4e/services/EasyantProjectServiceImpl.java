@@ -96,10 +96,8 @@ public class EasyantProjectServiceImpl implements EasyantProjectService{
 */
     public void runBuild(IProject project, String buildTaskName, int logLevel, IProgressMonitor monitor) {
         console.show();
-        console.info("
-");
-        console.info(project.getName() + "$ easyant " + buildTaskName+"
-");
+        console.info("");
+        console.info(project.getName() + "$ easyant " + buildTaskName+".");
         
         IFile ivyFile = project.getFile("module.ivy");
         String ivyFilePath = ivyFile.getLocation().toOSString();
@@ -210,14 +208,14 @@ public class EasyantProjectServiceImpl implements EasyantProjectService{
     
 
     public void addNature(IProject project) {
-        addNature(project, null, null); 
+        addNature(project, null); 
     }
     
-    private void addNature(IProject project, Shell shell, IProgressMonitor monitor) {
+    private void addNature(IProject project, IProgressMonitor monitor) {
 
         AddEasyAntNatureOperation addNature = new AddEasyAntNatureOperation(project);
         try {
-            if(shell==null && monitor==null){
+            if(monitor==null){
                 PlatformUI.getWorkbench().getProgressService().run(false, false, addNature);
             }else{
                 addNature.run(monitor);
@@ -246,7 +244,7 @@ public class EasyantProjectServiceImpl implements EasyantProjectService{
         
     }
 
-    public IProject importProject(IProjectDescription projectDescription,  Shell messageShell, IProgressMonitor monitor) {
+    public IProject importProject(IProjectDescription projectDescription/*,  Shell messageShell*/, IProgressMonitor monitor) {
         //String projectName = importProjectDescriptor.getProjectName();
         //IProjectDescription projectDescription = importProjectDescriptor.getDescription();
         String projectName = projectDescription.getName();
@@ -274,7 +272,7 @@ public class EasyantProjectServiceImpl implements EasyantProjectService{
             ImportOperation importOperation = new ImportOperation(rootWorkspace.getFullPath(),importSource,FileSystemStructureProvider.INSTANCE, new IOverwriteQuery(){
                     public String queryOverwrite(String pathString) { return ALL; }
             });
-            importOperation.setContext(messageShell);
+            //importOperation.setContext(messageShell);//FIXME is it required?
             try {
                 //PlatformUI.getWorkbench().getProgressService().run(false, false, importOperation);
                 importOperation.run(monitor);
@@ -291,7 +289,7 @@ public class EasyantProjectServiceImpl implements EasyantProjectService{
             project.open(IResource.BACKGROUND_REFRESH, new SubProgressMonitor(monitor, 70));
             // configure project, apply EasyAnt nature
 //          if (importProjectDescriptor.isFromIvyDescription()) {
-                addNature(project, messageShell, monitor);
+                addNature(project/*, messageShell*/, monitor);
 //          }
         } catch (CoreException e) {
             Activator.getEasyAntPlugin().log(IStatus.ERROR, "Cannot configure imported project.", e);

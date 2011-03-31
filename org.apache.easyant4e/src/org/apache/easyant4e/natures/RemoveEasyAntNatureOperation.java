@@ -47,7 +47,7 @@ public class RemoveEasyAntNatureOperation implements IRunnableWithProgress {
                     monitor.subTask("Remove the EasyAnt nature to the project " + project.getName());
                     IProjectDescription description = project.getDescription();
                     String[] oldNatures = description.getNatureIds();
-                    ArrayList newNatures = new ArrayList();
+                    ArrayList<String> newNatures = new ArrayList<String>();
                     for (int i = 0; i < oldNatures.length; i++) {
                         if (!oldNatures[i].equals(EasyAntNature.NATURE_ID)) {
                             newNatures.add(oldNatures[i]);

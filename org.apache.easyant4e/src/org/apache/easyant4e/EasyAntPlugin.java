@@ -40,7 +40,7 @@ public class EasyAntPlugin {
 
     public EasyAntPlugin(Module... modules) {
         injector = Guice.createInjector(modules);
-        injectMembers(this);
+        injector.injectMembers(this);
     }
 
     public void injectMembers(Object instance) {

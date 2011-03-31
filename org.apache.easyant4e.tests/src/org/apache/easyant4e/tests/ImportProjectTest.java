@@ -18,7 +18,6 @@
 package org.apache.easyant4e.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -27,6 +26,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.easyant4e.Activator;
@@ -34,11 +34,8 @@ import org.apache.easyant4e.EasyAntPlugin;
 import org.apache.easyant4e.services.EasyantProjectService;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -46,9 +43,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.pde.core.plugin.IPluginModelBase;
 import org.eclipse.pde.core.plugin.PluginRegistry;
-import org.eclipse.pde.internal.core.util.CoreUtility;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -87,10 +81,7 @@ public class ImportProjectTest{
         String[] newNatures= {};
         description.setNatureIds(newNatures);   
     
-        Thread.sleep(2000);
-        Shell messageShell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-        assertNotNull(messageShell);
-        simpleJavaProject = projectService.importProject(description, messageShell, new NullProgressMonitor());
+        simpleJavaProject = projectService.importProject(description, new NullProgressMonitor());
         assertNotNull(simpleJavaProject);
         assertTrue(simpleJavaProject.exists());
         assertTrue(simpleJavaProject.isOpen());
@@ -101,41 +92,31 @@ public class ImportProjectTest{
             fail(e.getMessage());
         }
         assertTrue(projectService.hasEasyAntNature(simpleJavaProject));
-        
-        //Assert source folders
-        assertTrue(simpleJavaProject.hasNature(JavaCore.NATURE_ID));    
-        IJavaProject javaProject = (IJavaProject)simpleJavaProject.getNature(JavaCore.NATURE_ID);
+        assertSourceFolders(simpleJavaProject);
+        //TODO assert classpath
+        //org.eclipse.jdt.launching.JRE_CONTAINER
+        //org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/module.ivy/*
+    }
+    
+    private void assertSourceFolders(IProject project) throws Exception{
+    	assertTrue(project.hasNature(JavaCore.NATURE_ID));    
+        IJavaProject javaProject = (IJavaProject)project.getNature(JavaCore.NATURE_ID);
         assertNotNull(javaProject);
         List<IClasspathEntry> entries = new ArrayList<IClasspathEntry>();
         entries.addAll(Arrays.asList(javaProject.getRawClasspath()));
         assertTrue(entries.size()>0);
-        boolean srcMainJavaSourceFolderFound=false;
-        boolean srcTestJavaSourceFolderFound=false;
-        boolean srcMainResourcesSourceFolderFound=false;
-        boolean srcTestResourcesSourceFolderFound=false;
+        HashSet<String> sourceFolders = new HashSet<String>();
         for(IClasspathEntry entry:entries){
             if(IClasspathEntry.CPE_SOURCE==entry.getEntryKind()){
                 String path = entry.getPath().toOSString();
                 assertNotNull(path);
-                if("/simplejavaproject/src/main/java".equals(path)){
-                    srcMainJavaSourceFolderFound=true;
-                }else if("/simplejavaproject/src/test/java".equals(path)){
-                    srcTestJavaSourceFolderFound=true;
-                }else if("/simplejavaproject/src/main/resources".equals(path)){
-                    srcMainResourcesSourceFolderFound=true;
-                }else if("/simplejavaproject/src/test/resources".equals(path)){
-                    srcTestResourcesSourceFolderFound=true;
-                }
+                sourceFolders.add(path);
             }
         }
-        assertTrue(srcMainJavaSourceFolderFound);
-        assertTrue(srcTestJavaSourceFolderFound);
-        assertTrue(srcMainResourcesSourceFolderFound);
-        assertTrue(srcTestResourcesSourceFolderFound);
-        
-        //TODO assert classpath
-        //org.eclipse.jdt.launching.JRE_CONTAINER
-        //org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/module.ivy/*
+        assertTrue(sourceFolders.contains("/simplejavaproject/src/main/java"));
+        assertTrue(sourceFolders.contains("/simplejavaproject/src/test/java"));
+        assertTrue(sourceFolders.contains("/simplejavaproject/src/main/resources"));
+        assertTrue(sourceFolders.contains("/simplejavaproject/src/test/resources"));
     }
     
     private IPath getSimpleJavaProjectLocation(String projectPath){

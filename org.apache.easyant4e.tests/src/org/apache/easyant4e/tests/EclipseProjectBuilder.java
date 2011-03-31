@@ -113,7 +113,7 @@ public class EclipseProjectBuilder {
                 + "<ivy-module version=\"2.0\" xmlns:ea=\"http://www.easyant.org\">"
                 + "  <info organisation=\"" + org + "\" module=\"" + project.getName() + "\" status=\"integration\" >"
                 + "    <description>project description</description>" 
-                + "    <ea:build type=\"org.apache.easyant.buildtypes#build-std-java;0.2\" />"
+                + "    <ea:build organisation=\"org.apache.easyant.buildtypes\" module=\"build-std-java\" revision=\"0.2\"/>"
                 + "  </info>" 
                 + "</ivy-module>";
         InputStream in = new ByteArrayInputStream(content.getBytes());
@@ -159,9 +159,9 @@ public class EclipseProjectBuilder {
     // throws JavaModelException {
     // StringBuffer buf = new StringBuffer();
     // buf.append("package " + pack.getElementName() + ";
-");
+//");
     // buf.append("
-");
+//");
     // buf.append(source);
     // ICompilationUnit cu = pack.createCompilationUnit(cuName,
     // buf.toString(), false, null);

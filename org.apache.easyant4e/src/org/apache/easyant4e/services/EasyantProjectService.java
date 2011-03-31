@@ -34,10 +34,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Shell;
 
 public interface EasyantProjectService {
-
-    //Ivy getIvyInstance(IProject project);
     
-    IProject importProject(IProjectDescription projectDescription, Shell messageShell, IProgressMonitor monitor);
+    IProject importProject(IProjectDescription projectDescription/*, Shell messageShell*/, IProgressMonitor monitor);
     
     boolean hasEasyAntNature(IProject project);
     

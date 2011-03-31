@@ -576,7 +576,7 @@ public class EasyAntImportWizardPage extends WizardPage {
      */
     private IProject createExistingProject(final ProjectRecord record, IProgressMonitor monitor)
             throws InvocationTargetException, InterruptedException {        
-        return easyantProjectService.importProject(record.getDescription(), getShell(), monitor);
+        return easyantProjectService.importProject(record.getDescription()/*, getShell()*/, monitor);
     }
 
     /**

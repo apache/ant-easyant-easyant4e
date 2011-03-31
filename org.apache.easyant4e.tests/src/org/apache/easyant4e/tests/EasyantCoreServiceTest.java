@@ -31,19 +31,11 @@ import org.junit.Test;
 
 public class EasyantCoreServiceTest extends AbstractEasyAntTest {
 
-/*
-    @Test
-    public void testGetIvyInstance() {
-        Ivy ivy = coreService.getIvyInstance(testProject);
-        assertNotNull(ivy);
-    }
-*/
-
     @Test
     public void testGetPluginsRepositoryPath() {
         String pluginsRepositoryPath = coreService.getPluginsRepositoryPath();
         assertNotNull(pluginsRepositoryPath);
-        String pluginPath = System.getProperty("user.home") + "/.easyant/repository";
+        String pluginPath = System.getProperty("user.home") + "/.easyant/easyant-repository";
         assertEquals(pluginPath, pluginsRepositoryPath);
     }
 

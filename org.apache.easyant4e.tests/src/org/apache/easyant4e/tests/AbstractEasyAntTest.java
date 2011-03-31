@@ -28,14 +28,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.ui.IPackagesViewPart;
-import org.eclipse.jdt.ui.JavaUI;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.ui.IPerspectiveDescriptor;
-import org.eclipse.ui.ISelectionService;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 import org.junit.After;
 import org.junit.Before;
 
@@ -72,11 +64,14 @@ public abstract class AbstractEasyAntTest {
         assertNotNull(testProject);
         IFile testJavaModuleDesc = EclipseProjectBuilder.createModuleDescriptorFile(testJavaProject.getProject(), "org.apache.easyant");
         assertNotNull(testJavaModuleDesc);
-        assertTrue(testJavaModuleDesc.exists());       
+        assertTrue(testJavaModuleDesc.exists());   
+        
+		//TODO register error log handler Activator.getEasyAntPlugin().log
     }
     
     @After
     public void tearDown() throws CoreException {
+		//TODO check assert empty error log Activator.getEasyAntPlugin().log
         if(this.testProject!=null){
             EclipseProjectBuilder.deleteProject(testProject);
             this.testProject = null;

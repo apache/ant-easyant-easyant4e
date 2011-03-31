@@ -295,9 +295,8 @@ public class EasyAntNature implements IProjectNature {
             ICommand[] newCommands = new ICommand[commands.length - 1];
             int i = 0;
             for (ICommand command : commands) {
-                if (command.getBuilderName().equals(builderID)) {
+                if (!command.getBuilderName().equals(builderID)) {
                     // Remove the given builder
-                } else {
                     newCommands[i] = command;
                     i++;
                 }
