@@ -23,10 +23,10 @@ import java.util.List;
 import org.apache.easyant.core.report.PhaseReport;
 import org.apache.easyant.core.report.TargetReport;
 import org.apache.easyant4e.services.EasyantProjectService;
-import org.apache.ivyde.eclipse.ui.core.IvyFileEditorInput;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.ui.IFileEditorInput;
 
 import com.google.inject.Inject;
 
@@ -43,8 +43,8 @@ public class BuildLifeCycleContentProvider implements ITreeContentProvider {
     }
 
     public Object[] getElements(Object inputElement) {
-        if (inputElement instanceof IvyFileEditorInput) {
-            IvyFileEditorInput ivyFileEditorInput = (IvyFileEditorInput) inputElement;
+        if (inputElement instanceof IFileEditorInput) {
+            IFileEditorInput ivyFileEditorInput = (IFileEditorInput) inputElement;
             IFile ivyFile = ivyFileEditorInput.getFile();
             List<PhaseReport> phaseReports = easyantProjectService.getPhases(ivyFile);
             List<TargetReport> targetReports = easyantProjectService.getTargets(ivyFile);

@@ -27,8 +27,8 @@ import java.util.List;
 import org.apache.easyant.core.descriptor.PropertyDescriptor;
 import org.apache.easyant4e.Activator;
 import org.apache.easyant4e.services.EasyantProjectService;
-import org.apache.ivyde.eclipse.cpcontainer.IvyClasspathContainer;
-import org.apache.ivyde.eclipse.cpcontainer.IvyClasspathUtil;
+import org.apache.ivyde.eclipse.cp.IvyClasspathContainer;
+import org.apache.ivyde.eclipse.cp.IvyClasspathContainerHelper;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
@@ -130,7 +130,7 @@ public class EasyAntNature implements IProjectNature {
         }
         
         // add the classpath entry
-        IPath path = new Path(IvyClasspathContainer.CONTAINER_ID).append(projectConf.toString());
+        IPath path = new Path(IvyClasspathContainer.ID).append(projectConf.toString());
         IClasspathEntry newEntry = JavaCore.newContainerEntry(path);
         addClassPathEntry(javaProject, newEntry);
     }
@@ -260,7 +260,7 @@ public class EasyAntNature implements IProjectNature {
                 IClasspathEntry entry = entries[i];
                 if (entry != null && entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
                     IPath path = entry.getPath();
-                    if (IvyClasspathUtil.isIvyClasspathContainer(path)) {
+                    if (IvyClasspathContainerHelper.isIvyClasspathContainer(path)) {
                         continue;
                     }
                 }
