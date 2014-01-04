@@ -20,7 +20,7 @@ package org.apache.easyant4e.console;
 import org.apache.easyant4e.Activator;
 import org.apache.easyant4e.EasyAntPlugin;
 import org.apache.easyant4e.providers.ImageProvider;
-import org.apache.ivyde.eclipse.ui.console.IvyConsole;
+import org.apache.ivyde.internal.eclipse.ui.console.IvyConsole;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
